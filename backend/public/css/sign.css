@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/backend/views/public/imgs/bg3.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+/* Header Styling */
+header {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .logo img {
+    width: 60px;
+}
+
+header nav {
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+header .cta-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+header .cta-buttons a {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+header .cta-buttons a.signup {
+    background-color: #00b894;
+    border-color: #00b894;
+}
+
+header .cta-buttons a.signup:hover {
+    background-color: #009874;
+}
+
+header .cta-buttons a.signin:hover {
+    background-color: white;
+    color: #2f3542;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 50px;
+    max-width: 500px;
+    width: 100%;
+    margin: 100px auto;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.container h2 {
+    font-size: 28px;
+    color: #2f3542;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.container input,select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.container button {
+    width: 100%;
+    padding: 15px;
+    background: #00b894;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.container button:hover {
+    background: #009874;
+}
+
+.container .footer-text {
+    margin-top: 20px;
+    color: #333;
+}
+
+.container .footer-text a {
+    color: #6c5ce7;
+    text-decoration: none;
+}
+
+.container .footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #2f3542;
+    color: white;
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer .footer-section {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+footer .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #f1f2f6;
+}
+
+footer .footer-section p,
+footer .footer-section a {
+    color: #dcdde1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer .footer-section a:hover {
+    color: #6c5ce7;
+}
+
+footer .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+footer .social-icons a {
+    font-size: 18px;
+    color: white;
+    transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+    color: #6c5ce7;
+}
+
+footer p.copyright {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+

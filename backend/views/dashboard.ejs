@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome to Your Dashboard</h1>
+            <p>Hi, your User ID is: <strong><%= userId %></strong></p>
+            <p>You're logged in as: <strong><%= userRole %></strong></p>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-card">
+                <h3>Your Profile</h3>
+                <p>Here, you can see details about your account and activities.</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Orders</h3>
+                <p>Check the status of your recent orders.</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Settings</h3>
+                <p>Manage your account settings and preferences.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-footer">
+            <a href="/logout" class="logout-button">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
