@@ -1,21 +1,33 @@
 const Restaurant = require('../models/restaurantModel');
-
-// Render home page with a list of restaurants
-exports.getHomePage = async (req, res) => {
+const MenuItem = require('../models/menuItemModel');
+// Function to get and display all restaurants
+exports.getRestaurants = async (req, res) => {
     try {
-        const restaurants = await Restaurant.find(); // Fetch all restaurants
-        res.render('home', { restaurants }); // Render home.ejs with the restaurants data
+        // Fetch all restaurants from the database
+        const restaurants = await Restaurant.find();
+        
+        // Render the EJS template and pass the restaurants data to it
+        res.render('restaurants', { restaurants });
     } catch (error) {
-       res.render('home')// res.status(500).send('Error loading restaurants');
+        console.error('Error fetching restaurants:', error);
+        res.status(500).json({ message: 'Error fetching restaurants' });
     }
 };
 
-// Render individual restaurant page
-exports.getRestaurantPage = async (req, res) => {
+// Controller to display menu items for a specific restaurant
+exports.getRestaurantMenu = async (req, res) => {
+    const restaurantId = req.params.restaurantId;
+
     try {
-        const restaurant = await Restaurant.findById(req.params.id);
-        res.render('restaurant', { restaurant });
+        // Find the restaurant by ID
+        const restaurant = await Restaurant.findById(restaurantId);
+
+        // Find the menu items for this restaurant
+        const menuItems = await MenuItem.find({ restaurant: restaurantId });
+
+        // Render the restaurant menu page
+        res.render('menu', { restaurant, menuItems });
     } catch (error) {
-        res.status(404).send('Restaurant not found');
+        res.status(500).send('Error fetching menu items');
     }
 };

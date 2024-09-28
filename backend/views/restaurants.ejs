@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants</title>
+    <link rel="stylesheet" href="/css/restaurant.css">
+</head>
+<%- include('partials/header') %>
+<body>
+    <div class="container">
+        <h2>Restaurants</h2>
+        <% if (restaurants.length === 0) { %>
+            <p>No restaurants available.</p>
+        <% } else { %>
+            <ul class="restaurant-list">
+                <% restaurants.forEach(restaurant => { %>
+                    <li class="restaurant-item">
+                        <h3><%= restaurant.name %></h3>
+                        <p>Cuisine: <%= restaurant.cuisine %></p>
+                        <p>Address: <%= restaurant.address %></p>
+                        <p>Contact: <%= restaurant.contact %></p>
+                        <img src="<%=restaurant.picture%>" alt="<%= restaurant.name %> picture" style="width: 200px; height: 150px;">
+                        <a href="/restaurants/<%= restaurant._id %>/menu" class="btn">Order Now</a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+</body>
+<%- include('partials/footer') %>
+</html>

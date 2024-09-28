@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const restaurantController = require('../controllers/restaurantController');
 
-// Home page route
-router.get('/', restaurantController.getHomePage);
+// Route to display all restaurants
+router.get('/restaurants', restaurantController.getRestaurants);
 
-// Individual restaurant page route
-router.get('/restaurant/:id', restaurantController.getRestaurantPage);
+// Route to display menu items for a specific restaurant
+router.get('/restaurants/:restaurantId/menu', restaurantController.getRestaurantMenu);
 
 module.exports = router;

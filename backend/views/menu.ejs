@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= restaurant.name %> Menu</title>
+    <link rel="stylesheet" href="/css/menu.css">
+</head>
+<%- include('partials/header') %>
+<body>
+    <div class="container">
+        <h2>Menu for <%= restaurant.name %></h2>
+        <p>Cuisine: <%= restaurant.cuisine %></p>
+        <p>Address: <%= restaurant.address %></p>
+        <p>Contact: <%= restaurant.contact %></p>
+        <img src="<%= restaurant.picture %>" alt="<%= restaurant.name %> picture" style="width: 300px; height: 200px;">
+
+        <h3>Menu Items</h3>
+        <% if (menuItems.length === 0) { %>
+            <p>No menu items available for this restaurant.</p>
+        <% } else { %>
+            <ul class="menu-list">
+                <% menuItems.forEach(item => { %>
+                    <li class="menu-item">
+                        <h4><%= item.name %></h4>
+                        <p>Price: $<%= item.price %></p>
+                        <p><%= item.description %></p>
+                        <img src="<%= item.image %>" alt="<%= item.name %> picture" style="width: 150px; height: 100px;">
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+</body>
+<%- include('partials/footer') %>
+</html>
