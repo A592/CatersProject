@@ -18,14 +18,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('MongoDB connected...');
-}).catch((err) => {
-    console.log('MongoDB connection error:', err);
-});
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log('Connected to database...');
+        app.listen(process.env.PORT, () => {
+            console.log(`Listening on port ${process.env.PORT}...`);
+        });
+    })
+    .catch((err) => { console.log(err); });
 app.use(
     session({
         secret: 'yourSecretKey',  // Replace with a strong secret
@@ -59,9 +59,4 @@ app.get('/sign-up', (req, res) => {
     res.render('sign-up');
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
