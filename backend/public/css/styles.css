@@ -85,3 +85,60 @@ p {
 .logout-button:hover {
     background-color: #45a049;
 }
+
+.Catering {
+    width: 100%;
+    position: relative;
+  }
+  
+  .Catering img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .text {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Ensure centering is exact */
+    color: rgb(255, 249, 249); /* Bright color for dark backgrounds */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Black shadow for readability */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 10px; /* Rounded corners for the text background */
+    font-size: 30px; /* Larger font size */
+    text-align: center; /* Center-align the text */
+  }
+  .text p{
+    font-weight: bold;
+    color: white;
+    font-size: 35px;
+  
+
+  }
+  .text h3 {
+    margin: 0; /* Remove margin from h3 to control spacing better */
+    color: white;
+    font-size: 30px;
+
+    
+
+  }
+  .button {
+    display: block;
+    margin: 20px auto 0; /* Centers the button and adds space above */
+    padding: 10px 25px;
+    background-color: gold; /* Gold color for the button */
+    color: #000000; /* Black text for readability */
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase; /* Makes all letters uppercase */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #b29600; /* Darker shade of gold on hover */
+  }

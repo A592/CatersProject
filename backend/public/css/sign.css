@@ -17,69 +17,68 @@ body {
     overflow-x: hidden;
 }
 
-/* Header Styling */
+/* General Header Styling */
 header {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(21, 20, 20, 0.5); /* Slightly transparent black for a subtle look */
+    color: #ffffff; /* White text */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px; /* Adjust padding for better spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000; /* Ensure header stays above other content */
 }
 
+/* Logo Image Styling */
 header .logo img {
-    width: 60px;
+    height: 50px; /* Adjust logo size */
+    width: auto; /* Maintain aspect ratio */
 }
 
+/* Navigation Links Styling */
 header nav {
     display: flex;
-    gap: 20px;
+    gap: 30px; /* Increase gap for better separation */
 }
 
 header nav a {
-    color: white;
+    color: #131313;
     text-decoration: none;
-    font-size: 16px;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: background-color 0.3s;
+    font-size: 20px; /* Slightly larger font size */
+    padding: 8px 16px; /* Padding for better touch interaction */
+    border-radius: 5px; /* Slight rounding of corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    font-weight: bold;
 }
 
 header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
 }
 
-header .cta-buttons {
-    display: flex;
-    gap: 15px;
-}
-
+/* Call to Action Buttons */
 header .cta-buttons a {
     padding: 10px 20px;
-    color: white;
-    border-radius: 25px;
-    border: 2px solid white;
-    text-decoration: none;
+    background-color: green; /* Orange color for a pop of color */
+    color: #000000; /* Black text for contrast */
+    border-radius: 5px;
     font-size: 16px;
-    transition: all 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
 }
 
-header .cta-buttons a.signup {
-    background-color: #00b894;
-    border-color: #00b894;
+header .cta-buttons .signup {
+    background-color: white; /* Darker orange */
+    border: none;
 }
 
-header .cta-buttons a.signup:hover {
-    background-color: #009874;
+header .cta-buttons a:hover {
+    background-color: #e67e22; /* Lighter orange on hover */
+    color: #ffffff; /* White text on hover */
 }
 
-header .cta-buttons a.signin:hover {
-    background-color: white;
-    color: #2f3542;
-}
 
 /* Container Styling */
 .container {
