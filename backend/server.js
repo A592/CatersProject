@@ -17,6 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Static folder for public files like CSS
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
@@ -40,10 +41,10 @@ app.use(
 // Routes
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const authRoutes = require('./routes/authRoutes');
-
+const orderRoutes = require('./routes/orderRoutes');
 app.use('/', restaurantRoutes);
 app.use('/', authRoutes);
-
+app.use('/api/bookings', orderRoutes);
 app.get('/', (req, res) => {
     res.redirect('/home');
 });

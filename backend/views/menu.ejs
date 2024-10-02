@@ -5,36 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu for Al Nafoura Lebanese</title>
     <link rel="stylesheet" href="/css/menu.css">
-  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Menu for Al Nafoura Lebanese</h1>
         <p>Cuisine: Lebanese</p>
         <p>Address: King Fahd Rd, Riyadh, Saudi Arabia</p>
         <p>Contact: +966 11 123 4567</p>
+        <input type="hidden" id="restaurantId" value="<%= restaurant._id %>">
+
 
         <div class="card">
             <h2>VIP Package</h2>
             <p>Includes tea, coffee, and waiters</p>
-            <input type="radio" id="vip" name="package" value="vip" onclick="updatePrice()">
+            <input type="radio" id="vip" name="package" value="vip">
             <label for="vip">Select VIP Package</label>
         </div>
 
         <div class="card">
             <h2>Normal Package</h2>
             <p>Standard catering service</p>
-            <input type="radio" id="normal" name="package" value="normal" onclick="updatePrice()">
+            <input type="radio" id="normal" name="package" value="normal">
             <label for="normal">Select Normal Package</label>
         </div>
 
         <div class="billing">
             <label for="numPeople">Number of People:</label>
-            <input type="number" id="numPeople" value="5" min="1" onchange="updatePrice()">
-            <p>Total Price: <span id="totalPrice">$0</span></p>
-            <button onclick="bookNow()">Book Now</button>
+            <input type="number" id="numPeople" value="5" min="1" required>
+            <p id="peopleError" style="color:red; display:none;">Please enter a valid number of people.</p>
+
+            <p class="total-price">Total Price: <span id="totalPrice">$0</span></p>
+
+            <button id="bookButton" disabled>Confirm Booking</button>
         </div>
     </div>
-    <script src="/middleware/menuMiddleware.js"></script>
+
+    <!-- Include the external JavaScript file from the public/js directory -->
+    <script src="/js/menu.js"></script>
 </body>
 </html>

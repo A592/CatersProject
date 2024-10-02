@@ -1,60 +1,77 @@
+/* General page styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 0;
+    background-image: url('../imgs/homepage.jpg');
+}
+
 .container {
-    width: 100%;
-    margin: 0px 0px 30px 0px; 
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2 {
+    color: #333;
     text-align: center;
-    overflow: hidden; /* Ensures everything stays within the container */
 }
 
-.card {
-    width: 20%; /* Narrower width */
-    height: 400px; /* Increased height */
-    display: inline-block;
-    margin: 10px 5%; /* Adjusted margin for proper spacing */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    vertical-align: top;
-}
-
-.card h2, .card p {
-    margin: 10px 0;
+p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
 }
 
 input[type="radio"] {
     margin-right: 10px;
 }
 
-label {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.billing {
-    clear: both;
-    padding-top: 20px;
-    width: 100%; /* Ensures it stretches across the bottom */
-}
-
-input[type="number"], button {
-    padding: 10px;
+input[type="number"] {
+    width: 100px;
+    padding: 5px;
     margin-top: 10px;
 }
 
 button {
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 12px 24px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    width: 100%;
+    margin-top: 20px;
 }
 
-button:hover {
-    background-color: #369636;
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.total-price {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.card {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Error message styling */
+#peopleError {
+    color: red;
+    margin-top: 10px;
+    display: none;
+    font-size: 0.9rem;
 }

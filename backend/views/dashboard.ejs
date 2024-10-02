@@ -4,36 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <h1>Welcome to Your Dashboard</h1>
-            <p>Hi, your User ID is: <strong><%= userId %></strong></p>
-            <p>You're logged in as: <strong><%= userRole %></strong></p>
-        </div>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#orders">Orders</a></li>
+                    <li><a href="#restaurants">Restaurants</a></li>
+                    <li><a href="#users">Users</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <div class="dashboard-content">
-            <div class="dashboard-card">
-                <h3>Your Profile</h3>
-                <p>Here, you can see details about your account and activities.</p>
-            </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="user-profile">
+                    <span>Admin</span>
+                    <img src="/images/profile.png" alt="User Profile" />
+                </div>
+            </header>
 
-            <div class="dashboard-card">
-                <h3>Orders</h3>
-                <p>Check the status of your recent orders.</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h3>Settings</h3>
-                <p>Manage your account settings and preferences.</p>
-            </div>
-        </div>
-
-        <div class="dashboard-footer">
-            <a href="/logout" class="logout-button">Logout</a>
-        </div>
+            <!-- Content Section -->
+            <section class="content">
+                <h1>Welcome to your Dashboard</h1>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Orders</h3>
+                        <p>250</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Users</h3>
+                        <p>1200</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Restaurants</h3>
+                        <p>50</p>
+                    </div>
+                    <div class="card">
+                        <h3>Revenue</h3>
+                        <p>$5000</p>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>
