@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= restaurant.name %> Menu</title>
+    <title>Menu for Al Nafoura Lebanese</title>
     <link rel="stylesheet" href="/css/menu.css">
+  
 </head>
-<%- include('partials/header') %>
 <body>
     <div class="container">
-        <h2>Menu for <%= restaurant.name %></h2>
-        <p>Cuisine: <%= restaurant.cuisine %></p>
-        <p>Address: <%= restaurant.address %></p>
-        <p>Contact: <%= restaurant.contact %></p>
-        <img src="<%= restaurant.picture %>" alt="<%= restaurant.name %> picture" style="width: 300px; height: 200px;">
+        <h1>Menu for Al Nafoura Lebanese</h1>
+        <p>Cuisine: Lebanese</p>
+        <p>Address: King Fahd Rd, Riyadh, Saudi Arabia</p>
+        <p>Contact: +966 11 123 4567</p>
 
-        <h3>Menu Items</h3>
-        <% if (menuItems.length === 0) { %>
-            <p>No menu items available for this restaurant.</p>
-        <% } else { %>
-            <ul class="menu-list">
-                <% menuItems.forEach(item => { %>
-                    <li class="menu-item">
-                        <h4><%= item.name %></h4>
-                        <p>Price: $<%= item.price %></p>
-                        <p><%= item.description %></p>
-                        <img src="<%= item.image %>" alt="<%= item.name %> picture" style="width: 150px; height: 100px;">
-                    </li>
-                <% }); %>
-            </ul>
-        <% } %>
+        <div class="card">
+            <h2>VIP Package</h2>
+            <p>Includes tea, coffee, and waiters</p>
+            <input type="radio" id="vip" name="package" value="vip" onclick="updatePrice()">
+            <label for="vip">Select VIP Package</label>
+        </div>
+
+        <div class="card">
+            <h2>Normal Package</h2>
+            <p>Standard catering service</p>
+            <input type="radio" id="normal" name="package" value="normal" onclick="updatePrice()">
+            <label for="normal">Select Normal Package</label>
+        </div>
+
+        <div class="billing">
+            <label for="numPeople">Number of People:</label>
+            <input type="number" id="numPeople" value="5" min="1" onchange="updatePrice()">
+            <p>Total Price: <span id="totalPrice">$0</span></p>
+            <button onclick="bookNow()">Book Now</button>
+        </div>
     </div>
+    <script src="/middleware/menuMiddleware.js"></script>
 </body>
-<%- include('partials/footer') %>
 </html>

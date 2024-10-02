@@ -142,3 +142,64 @@ p {
   .button:hover {
     background-color: #b29600; /* Darker shade of gold on hover */
   }
+
+  .offers-section {
+    background-color: #f5f5f5; /* Light grey background */
+    text-align: center;
+    padding: 20px 0;
+}
+
+.offers-section h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.offers-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.offer {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px; /* Adjust based on your preference */
+    padding: 15px;
+    text-align: left;
+}
+
+.offer img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.offer h3 {
+    color: #333;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.offer p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.order-button {
+    background-color: #ffa500; /* Matching the button color on your homepage */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.order-button:hover {
+    background-color: #cc8400; /* Darker shade on hover */
+}
+
