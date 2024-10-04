@@ -5,23 +5,31 @@ const Restaurant = require('../models/restaurantModel');
 // Controller method to handle booking submission
 exports.submitBooking = async (req, res) => {
     try {
-        const { packageType, numPeople, totalPrice, userId, restaurantId } = req.body;
+        const { packageType, numPeople, totalPrice } = req.body;
 
         // Validate user and restaurant existence
         //const user = await User.findById(userId);
+        const restaurantId = req.session.restaurantId;
         const restaurant = await Restaurant.findById(restaurantId);
-
-       // if (!user || !restaurant) {
-         //   return res.status(404).json({ success: false, message: 'User or Restaurant not found' });
-       // }
+        const user = req.session.user;
+        if (!restaurant) {
+            return res.status(401).json({ success: false, message: 'Restaurant not found in session',redirectUrl: '/restaurant' });
+        }
+        if(!restaurantId){
+            return res.status(401).json({ success: false, message: 'Restaurant not found in session',redirectUrl: '/restaurant' });
+        }
+        
+        if (!user) {
+            return res.status(401).json({ success: false, message: 'User not logged in',redirectUrl: '/sign-in' });
+        }
 
         // Create a new order and save to the database
         const newOrder = new Order({
             packageType,
             numPeople,
             totalPrice,
-            user: '66f7087039bd5d504b4b3721',
-            restaurant: restaurant
+            user: user._id,
+            restaurant: restaurant._id
         });
 
         await newOrder.save();

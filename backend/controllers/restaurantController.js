@@ -1,13 +1,13 @@
 const Restaurant = require('../models/restaurantModel');
-const MenuItem = require('../models/menuItemModel');
+const packageModel = require('../models/packageModel');
 // Function to get and display all restaurants
 exports.getRestaurants = async (req, res) => {
     try {
         // Fetch all restaurants from the database
         const restaurants = await Restaurant.find();
-        
+        const user = req.session.user;
         // Render the EJS template and pass the restaurants data to it
-        res.render('restaurants', { restaurants });
+        res.render('restaurants', { restaurants , user });
     } catch (error) {
         console.error('Error fetching restaurants:', error);
         res.status(500).json({ message: 'Error fetching restaurants' });
@@ -21,12 +21,12 @@ exports.getRestaurantMenu = async (req, res) => {
     try {
         // Find the restaurant by ID
         const restaurant = await Restaurant.findById(restaurantId);
-
+        req.session.restaurantId = restaurant._id;
         // Find the menu items for this restaurant
-        const menuItems = await MenuItem.find({ restaurant: restaurantId });
+        const packages = await packageModel.find({ restaurant: restaurantId });
 
         // Render the restaurant menu page
-        res.render('menu', { restaurant, menuItems });
+        res.render('menu', { restaurant, packages });
     } catch (error) {
         res.status(500).send('Error fetching menu items');
     }

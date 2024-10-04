@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu for Al Nafoura Lebanese</title>
+    <title>Menu for <%= restaurant.name %></title>
     <link rel="stylesheet" href="/css/menu.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -14,22 +14,23 @@
         <p><strong>Cuisine:</strong> <%= restaurant.cuisine %></p>
         <p><strong>Address:</strong> <%= restaurant.address %></p>
         <p><strong>Contact:</strong> <%= restaurant.contact %></p>
-        <input type="hidden" id="restaurantId" value="<%= restaurant._id %>">
 
-
-        <div class="card">
-            <h2>VIP Package</h2>
-            <p>Includes tea, coffee, and waiters</p>
-            <input type="radio" id="vip" name="package" value="vip">
-            <label for="vip">Select VIP Package</label>
-        </div>
-
-        <div class="card">
-            <h2>Normal Package</h2>
-            <p>Standard catering service</p>
-            <input type="radio" id="normal" name="package" value="normal">
-            <label for="normal">Select Normal Package</label>
-        </div>
+        <!-- Loop through the packages and display them -->
+        <% if (packages.length === 0) { %>
+            <p>No packages available for this restaurant.</p>
+        <% } else { %>
+            <% packages.forEach(package => { %>
+                <div class="card">
+                    <h2><%= package.name %></h2>
+                    <img src="<%= package.image %>" alt="<%= package.name %> image" style="width: 200px; height: 150px;">
+                    <p><%= package.description %></p>
+                    <p><strong>Price:</strong> $<%= package.price %></p>
+                    <input type="radio" id="<%= package.name %>" name="package" value="<%= package.name %>" data-price="<%= package.price %>">
+                    <label for="<%= package.name %>">Select <%= package.name %></label>
+                    <input type="hidden" id="restaurantId" value="<%= restaurant._id %>">
+                </div>
+            <% }) %>
+        <% } %>
 
         <div class="billing">
             <label for="numPeople">Number of People:</label>
@@ -43,6 +44,7 @@
     </div>
 
     <!-- Include the external JavaScript file from the public/js directory -->
+   
     <script src="/js/menu.js"></script>
 </body>
 </html>

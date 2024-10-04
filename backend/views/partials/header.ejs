@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="/css/sign.css">
-
+<link rel="stylesheet" href="/css/header.css">
 
 <header>
     <div class="logo">
@@ -12,7 +11,44 @@
         <a href="contact.html">Contact</a>
     </nav>
     <div class="cta-buttons">
-        <a href="sign-in" class="signin">Sign In</a>
-        <a href="sign-up" class="signup">Sign Up</a>
+        <% if (typeof user !== 'undefined') { %>
+            <!-- Profile Section (Visible when logged in) -->
+            <div class="profile-section">
+                <img src="/imgs/profile-user.png" class="avatar" alt="Profile" id="profileButton" />
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="dropdown" id="profileMenu">
+                <div class="profile-info">
+                    <img src="/imgs/profile-user.png" class="avatar-large" alt="Profile" />
+                    <div class="info">
+                        <span><%= user.name %></span>
+                        <small><%= user.email %></small>
+                    </div>
+                </div>
+                <hr />
+                <ul>
+                    <li><img src="/imgs/profile-user.png" alt="icon" /> View Profile</li>
+                    <li><img src="/imgs/setting.png" alt="icon" /> Account Settings</li>
+                    <li><img src="/imgs/bell.png" alt="icon" /> Notifications</li>
+                    <li><img src="/imgs/user-account.png" alt="icon" /> Switch Account</li>
+                    <li><img src="/imgs/customer-support.png" alt="icon" /> Help Center</li>
+                    <li><a href="/logout"><img src="/imgs/logout.png" alt="icon" /> Logout</a></li>
+                </ul>
+            </div>
+        <% } else { %>
+            <a href="/sign-in" class="signin">Sign In</a>
+            <a href="/sign-up" class="signup">Sign Up</a>
+        <% } %>
     </div>
 </header>
+
+<script>
+    const profileButton = document.getElementById('profileButton');
+    const profileMenu = document.getElementById('profileMenu');
+
+    profileButton.addEventListener('click', function () {
+        profileMenu.classList.toggle('open');
+    });
+</script>
+

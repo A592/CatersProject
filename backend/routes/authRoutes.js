@@ -13,6 +13,13 @@ router.post('/sign-up', authController.registerUser);
 // Handle logout
 router.get('/logout', authController.logoutUser);
 
+router.get('/home', (req, res) => {
+    // Check if the user is in the session
+    const user = req.session.user;
+
+    // Render the home page and pass the user to the EJS template
+    res.render('home', { user });
+});
 
 // Render the login page
 router.get('/sign-in', (req, res) => {
@@ -22,8 +29,6 @@ router.get('/sign-in', (req, res) => {
 // Handle login form submission
 router.post('/sign-in', authController.loginUser);
 
-router.get('/dashboard', isAuthenticated, (req, res) => {
-    res.render('dashboard', { userId: req.session.userId, userRole: req.session.userRole });
-});
+
 
 module.exports = router;

@@ -31,34 +31,87 @@
                     <input type="text" placeholder="Search...">
                 </div>
                 <div class="user-profile">
-                    <span>Admin</span>
+                    <span><%= user.name %></span>
                     <img src="/images/profile.png" alt="User Profile" />
                 </div>
             </header>
 
             <!-- Content Section -->
             <section class="content">
-                <h1>Welcome to your Dashboard</h1>
+                <h1>Welcome to your Dashboard, <%= user.name %></h1>
+                
+                <!-- Cards section -->
                 <div class="cards">
                     <div class="card">
                         <h3>Total Orders</h3>
-                        <p>250</p>
+                        <p><%= orders.length %></p> <!-- Total number of orders -->
                     </div>
                     <div class="card">
-                        <h3>Total Users</h3>
-                        <p>1200</p>
-                    </div>
-                    <div class="card">
-                        <h3>Total Restaurants</h3>
-                        <p>50</p>
-                    </div>
-                    <div class="card">
-                        <h3>Revenue</h3>
-                        <p>$5000</p>
+                        <h3>Your Restaurants</h3>
+                        <p><%= restaurants.length %></p> <!-- Total number of restaurants -->
                     </div>
                 </div>
+
+                <!-- Restaurants Section -->
+                <section id="restaurants">
+                    <h2>Your Restaurants</h2>
+                    <% if (restaurants.length === 0) { %>
+                        <p>You have no restaurants.</p>
+                    <% } else { %>
+                        <ul>
+                            <% restaurants.forEach(restaurant => { %>
+                                <li>
+                                    <h3><%= restaurant.name %></h3>
+                                    <p><strong>Cuisine:</strong> <%= restaurant.cuisine %></p>
+                                    <p><strong>Availability:</strong> 
+                                        <span id="availability-status-<%= restaurant._id %>">
+                                            <%= restaurant.availability ? 'Available' : 'Unavailable' %>
+                                        </span>
+                                    </p>
+                                    <button onclick="toggleAvailability('<%= restaurant._id %>')">Toggle Availability</button>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders">
+                    <h2>Orders for Your Restaurants</h2>
+                    <% if (orders.length === 0) { %>
+                        <p>No orders have been placed yet.</p>
+                    <% } else { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Restaurant</th>
+                                    <th>Package</th>
+                                    <th>Number of People</th>
+                                    <th>Total Price</th>
+                                    <th>Ordered By</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% orders.forEach(order => { %>
+                                    <tr>
+                                        <td><%= order.restaurant.name %></td>
+                                        <td><%= order.packageType %></td>
+                                        <td><%= order.numPeople %></td>
+                                        <td>$<%= order.totalPrice %></td>
+                                        <td><%= order.user.name %></td>
+                                        <td><%= order.createdAt.toLocaleDateString() %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    <% } %>
+                </section>
             </section>
         </main>
     </div>
+
+    <!-- External JavaScript file -->
+    <script src="/js/dashboard.js"></script>
 </body>
 </html>

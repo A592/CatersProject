@@ -49,9 +49,14 @@ exports.loginUser = async (req, res) => {
         }
 
         // If login is successful
+        req.session.user = user;
         req.session.userId = user._id;  // Store user ID in session
         req.session.userRole = user.role;  // Store user role in session
-        return res.redirect('/dashboard');
+        if (user.role === 'restaurant_owner') {
+            return res.redirect('/dashboard'); // Redirect to dashboard if user is a restaurant owner
+        } else {
+            return res.redirect('/home'); // Redirect to home page if the user is a regular user
+        }
        // return res.render('sign-in', { message: 'Login successful!', messageType: 'success' });
     } catch (error) {
         res.render('sign-in', { message: 'Server error. Please try again later.', messageType: 'error' });
@@ -61,7 +66,7 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.redirect('/dashboard'); // If there is an error, keep the user logged in
+            return res.redirect('/home'); // If there is an error, keep the user logged in
         }
         res.clearCookie('connect.sid');  // Clear the session cookie
         return res.redirect('/sign-in');  // Redirect to the sign-in page

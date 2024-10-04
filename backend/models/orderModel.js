@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
     packageType: {
         type: String,
-        enum: ['vip', 'normal'],
         required: true
     },
     numPeople: {

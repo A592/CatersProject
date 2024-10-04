@@ -1,98 +1,88 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const vipRadio = document.getElementById('vip');
-    const normalRadio = document.getElementById('normal');
-    const numPeople = document.getElementById('numPeople');
+    const packageRadios = document.querySelectorAll('input[name="package"]');
+    const numPeopleInput = document.getElementById('numPeople');
     const totalPriceDisplay = document.getElementById('totalPrice');
     const bookButton = document.getElementById('bookButton');
-    const peopleError = document.getElementById('peopleError');
-    const restID = document.getElementById('restaurantId').value;
+    let selectedPackagePrice = 0;
 
-    // Mocked user and restaurant IDs (replace with actual values)
-    const userId = '6487d9a9dbd2d0f258b4e344'; // Replace with logged-in user ID
-    const restaurantId = restID; // Replace with selected restaurant ID
-
-    // Price calculation logic
-    function updatePrice() {
-        const vipPrice = 200;
-        const normalPrice = 150;
-        let num = parseInt(numPeople.value, 10);
-        let total = 0;
-
-        if (vipRadio.checked) {
-            total = num * vipPrice;
-        } else if (normalRadio.checked) {
-            total = num * normalPrice;
-        }
-
-        totalPriceDisplay.textContent = `$${total}`;
-        validateForm();
-    }
-
-    // Form validation logic
-    function validateForm() {
-        const num = parseInt(numPeople.value, 10);
-        const isPackageSelected = vipRadio.checked || normalRadio.checked;
-
-        // Validate the number of people
-        if (num <= 0 || isNaN(num)) {
-            peopleError.style.display = 'block';
-            bookButton.disabled = true;
-            return false;
-        } else {
-            peopleError.style.display = 'none';
-        }
-
-        // Enable the button if form is valid
-        if (isPackageSelected && num > 0) {
+    // Function to update the total price based on selected package and number of people
+    function updateTotalPrice() {
+        const numPeople = parseInt(numPeopleInput.value, 10);
+        if (selectedPackagePrice > 0 && numPeople > 0) {
+            const total = selectedPackagePrice * numPeople;
+            totalPriceDisplay.textContent = `$${total}`;
             bookButton.disabled = false;
         } else {
+            totalPriceDisplay.textContent = "$0";
             bookButton.disabled = true;
         }
     }
 
+    // Event listener for package selection
+    packageRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            selectedPackagePrice = parseFloat(this.getAttribute('data-price'));
+            updateTotalPrice();
+        });
+    });
+
+    // Event listener for number of people input
+    numPeopleInput.addEventListener('change', function () {
+        updateTotalPrice();
+    });
     async function bookNow() {
-        const packageType = document.querySelector('input[name="package"]:checked').value;
-        const numPeopleValue = parseInt(document.getElementById('numPeople').value, 10);
-        const totalPriceValue = parseFloat(document.getElementById('totalPrice').textContent.replace('$', ''));
+        const selectedPackageElement = document.querySelector('input[name="package"]:checked');  // Get selected package
+        if (!selectedPackageElement) {
+            Swal.fire({
+                title: 'Select a Package',
+                text: 'Please choose a package before proceeding.',
+                icon: 'warning',
+            });
+            return;  // Stop the function if no package is selected
+        }
+    
+        const selectedPackage = selectedPackageElement.value;  // Get package value from the selected radio button
+        const numPeople = parseInt(document.getElementById('numPeople').value, 10);  // Number of people input
+        const totalPrice = parseFloat(document.getElementById('totalPrice').textContent.replace('$', ''));  // Total price calculation
+    
+        const restaurantId = document.getElementById('restaurantId').value;  // Restaurant ID
         
-        const restaurantId = document.getElementById('restaurantId').value;  // Get the restaurant ID
-    
-        const formData = {
-            packageType,
-            numPeople: numPeopleValue,
-            totalPrice: totalPriceValue,
-            restaurantId  // Include the restaurant ID
+        const bookingData = {
+            packageType: selectedPackage,  // Package type
+            numPeople: numPeople,  // Number of people
+            totalPrice: totalPrice,  // Total price
+            restaurantId: restaurantId  // Restaurant ID
         };
-    
+        
         try {
             const response = await fetch('/api/bookings/submitBooking', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(bookingData)  // Send booking data to backend
             });
     
-            const data = await response.json();
+            const result = await response.json();
     
-            // Debugging: Log the response
-            console.log('Response from backend:', data);
+            // Debugging: Log the response from the server
+            console.log('Response from backend:', result);
     
-            if (data.success) {
+            if (result.success) {
                 Swal.fire({
                     title: 'Booking Confirmed!',
-                    text: null,
+                    text: 'Your booking has been successfully confirmed.',
                     icon: 'success',
-                    timer: 5000,  // Auto-close after 2 seconds
+                    timer: 5000,  // Auto-close after 5 seconds
                     showConfirmButton: false
                 }).then(() => {
-                    // Redirect to homepage after the alert closes
-                    window.location.href = data.redirectUrl;
+                    // Redirect to the homepage after confirmation
+                    window.location.href = result.redirectUrl;
                 });
             } else {
                 Swal.fire({
                     title: 'Booking Failed',
-                    text: data.message,
+                    text: result.message,
                     icon: 'error',
                 });
             }
@@ -100,19 +90,13 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             Swal.fire({
                 title: 'Error',
-                text: 'Failed to book. Please try again.',
+                text: 'There was an issue processing your booking. Please try again.',
                 icon: 'error',
             });
         }
     }
-
-    // Event listeners
-    vipRadio.addEventListener('click', updatePrice);
-    normalRadio.addEventListener('click', updatePrice);
-    numPeople.addEventListener('input', updatePrice);
+    
 
     bookButton.addEventListener('click', bookNow);
-
-    // Initial form validation to disable/enable the button
-    validateForm();
 });
+

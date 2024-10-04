@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
+
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+/* General Header Styling */
+header {
+    background-color: rgba(21, 20, 20, 0.5); /* Slightly transparent black for a subtle look */
+    color: #ffffff; /* White text */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Adjust padding for better spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    position: relative;
+    top: 0;
+    z-index: 1000; /* Ensure header stays above other content */
+}
+
+/* Logo Image Styling */
+header .logo img {
+    height: 50px; /* Adjust logo size */
+    width: auto; /* Maintain aspect ratio */
+}
+
+/* Navigation Links Styling */
+header nav {
+    display: flex;
+    gap: 30px; /* Increase gap for better separation */
+}
+
+header nav a {
+    color: #131313;
+    text-decoration: none;
+    font-size: 20px; /* Slightly larger font size */
+    padding: 8px 16px; /* Padding for better touch interaction */
+    border-radius: 5px; /* Slight rounding of corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    font-weight: bold;
+}
+
+header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+}
+
+/* Call to Action Buttons */
+header .cta-buttons a[href="/sign-in"],a[href="/sign-up"] {
+    padding: 10px 20px;
+    background-color: green;
+    color: #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+header .cta-buttons .signup {
+    background-color: white;
+    border: none;
+}
+
+header .cta-buttons a:hover {
+    color: #ffffff;
+}
+
+/* Profile Dropdown Feature */
+.profile-section {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.avatar {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.notification {
+    margin-left: 20px;
+    position: relative;
+}
+
+.notification img {
+    height: 20px;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    background-color: white;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dropdown.open {
+    display: block;
+}
+
+.dropdown .profile-info {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.avatar-large {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dropdown .info span {
+    font-weight: 600;
+    color: black;
+}
+
+.dropdown .info small {
+    color: #888888fd;
+}
+
+.dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown ul li,a[href="/logout"] {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #000000;
+    text-decoration: none;
+}
+
+.dropdown ul li img {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.dropdown ul li:hover {
+    background-color: #f0f0f0;
+}
+
+hr {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+
+/* Large screens (desktops, laptops) */
+@media (min-width: 1200px) {
+    header {
+        padding: 20px 60px;
+    }
+
+    header nav a {
+        font-size: 22px; /* Larger font size for larger screens */
+        padding: 10px 20px; /* Increase padding */
+    }
+
+    .dropdown {
+        width: 300px; /* Wider dropdown for large screens */
+    }
+
+    .dropdown ul li img {
+        height: 24px; /* Larger icons */
+        width: 24px;
+    }
+}
+
+/* Medium screens (tablets, small laptops) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    header {
+        padding: 15px 40px;
+    }
+
+    header nav a {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    .dropdown {
+        width: 270px;
+    }
+
+    .dropdown ul li img {
+        height: 22px;
+        width: 22px;
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 767px) {
+    header {
+        flex-direction: column;
+        padding: 10px 20px;
+        justify-content: center;
+    }
+
+    header nav {
+        flex-direction: column;
+        gap: 15px; /* Stack the navigation links */
+        margin-top: 10px;
+    }
+
+    header .logo img {
+        height: 40px;
+    }
+
+    .cta-buttons a {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .profile-section .avatar {
+        height: 36px;
+        width: 36px;
+    }
+
+    .dropdown {
+        width: 220px; /* Narrower dropdown for mobile */
+    }
+
+    .dropdown ul li img {
+        height: 20px;
+        width: 20px;
+    }
+}
