@@ -84,6 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Booking Failed',
                     text: result.message,
                     icon: 'error',
+                    timer: 5000,  // Auto-close after 5 seconds
+                    showConfirmButton: false
+                }).then(() => {
+                    // Redirect to the sign in after confirmation
+                    window.location.href = result.redirectUrl;
                 });
             }
         } catch (error) {
