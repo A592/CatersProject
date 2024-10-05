@@ -69,10 +69,15 @@ const Package = require('./models/packageModel');
 const restaurantId = "66fed71a671caa92c5f07841"; // Example ID
 
 const newPackage = new Package({
-    name: 'VIP Catering Package',
-    price: 500,
-    description: 'Includes premium dishes, drinks, and exclusive service.',
-    image: 'https://example.com/vip-package.jpg', // Optional image
+    name: 'Standard Catering Package',
+    price: 170,
+    description: `
+	Starters: Garlic Bread
+	Main Course: Penne alla Puttanesca
+	Dessert: Tiramisu
+	Beverages: Soft Drinks
+    `,
+    image: '/imgs/restpic/asknorm.jpg', // Optional image
     restaurant: restaurantId
 });
 
@@ -83,7 +88,7 @@ newPackage.save()
     .catch(err => {
         console.error('Error saving package:', err);
     });
-
+/*
 const Restaurant = require('./models/restaurantModel');
 const User = require('./models/userModel');
 async function findRestaurantOwner() {
