@@ -28,17 +28,17 @@
                 </div>
                 <hr />
                 <ul>
-                    <li><img src="/imgs/profile-user.png" alt="icon" /> View Profile</li>
-                    <li><img src="/imgs/setting.png" alt="icon" /> Account Settings</li>
-                    <li><img src="/imgs/bell.png" alt="icon" /> Notifications</li>
-                    <li><img src="/imgs/user-account.png" alt="icon" /> Switch Account</li>
-                    <li><img src="/imgs/customer-support.png" alt="icon" /> Help Center</li>
-                    <li><a href="/logout"><img src="/imgs/logout.png" alt="icon" /> Logout</a></li>
+                    <li><a href=""><img src="/imgs/profile-user.png" alt="icon" /> View Profile</a></li>
+                    <li><a href=""><img src="/imgs/setting.png" alt="icon" /> Account Settings</a></li>
+                    <li><a href="/api/bookings/myOrders"><img src="/imgs/bell.png" alt="icon" /> My Orders</a></li> <!-- Updated this line -->
+                    <li><a href=""><img src="/imgs/user-account.png" alt="icon" /> Switch Account</a></li>
+                    <li><a href=""></a><img src="/imgs/customer-support.png" alt="icon" /> Help Center</a></li>
+                    <li><a href="/auth/logout"><img src="/imgs/logout.png" alt="icon" /> Logout</a></li>
                 </ul>
             </div>
         <% } else { %>
-            <a href="/sign-in" class="signin">Sign In</a>
-            <a href="/sign-up" class="signup">Sign Up</a>
+            <a href="/auth/sign-in" class="signin">Sign In</a>
+            <a href="/auth/sign-up" class="signup">Sign Up</a>
         <% } %>
     </div>
 </header>

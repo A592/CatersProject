@@ -18,7 +18,7 @@
                     <li><a href="#restaurants">Restaurants</a></li>
                     <li><a href="#users">Users</a></li>
                     <li><a href="#settings">Settings</a></li>
-                    <li><a href="/logout" class="logout-button">Logout</a></li>
+                    <li><a href="/auth/logout" class="logout-button">Logout</a></li>
                 </ul>
             </nav>
         </aside>
@@ -89,6 +89,7 @@
                                     <th>Number of People</th>
                                     <th>Total Price</th>
                                     <th>Ordered By</th>
+                                    <th>Status</th>
                                     <th>Date</th>
                                 </tr>
                             </thead>
@@ -100,6 +101,13 @@
                                         <td><%= order.numPeople %></td>
                                         <td>$<%= order.totalPrice %></td>
                                         <td><%= order.user.name %></td>
+                                        <td>
+                                            <select id="status-<%= order._id %>" onchange="updateOrderStatus('<%= order._id %>')">
+                                                <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                                <option value="In Progress" <%= order.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                                                <option value="Completed" <%= order.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                            </select>
+                                        </td>
                                         <td><%= order.createdAt.toLocaleDateString() %></td>
                                     </tr>
                                 <% }); %>

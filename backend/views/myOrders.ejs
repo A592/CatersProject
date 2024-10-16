@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="/css/myOrder.css"> <!-- Optional if you want specific styles -->
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <h1>My Orders</h1>
+        
+        <% if (orders.length === 0) { %>
+            <p>No orders found.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Restaurant</th>
+                        <th>Number of People</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Ordered On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(order => { %>
+                        <tr>
+                            <td><%= order.packageType %></td>
+                            <td><%= order.restaurant.name %></td>
+                            <td><%= order.numPeople %></td>
+                            <td>$<%= order.totalPrice %></td>
+                            <td><%= order.status %></td>
+                            <td><%= order.createdAt.toLocaleDateString() %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+    <%- include('partials/footer') %>
+</body>
+</html>

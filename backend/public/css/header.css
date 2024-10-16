@@ -58,7 +58,7 @@ header nav a:hover {
 }
 
 /* Call to Action Buttons */
-header .cta-buttons a[href="/sign-in"],a[href="/sign-up"] {
+header .cta-buttons a[href="/auth/sign-in"],a[href="/auth/sign-up"] {
     padding: 10px 20px;
     background-color: green;
     color: #000000;
@@ -157,7 +157,7 @@ header .cta-buttons a:hover {
     padding: 0;
 }
 
-.dropdown ul li,a[href="/logout"] {
+.dropdown ul li {
     padding: 12px 15px;
     display: flex;
     align-items: center;
@@ -166,7 +166,10 @@ header .cta-buttons a:hover {
     color: #000000;
     text-decoration: none;
 }
-
+a{
+    text-decoration: none;
+    color: #000000;
+}
 .dropdown ul li img {
     margin-right: 10px;
     height: 20px;

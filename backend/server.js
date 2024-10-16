@@ -44,23 +44,15 @@ const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 
-app.use('/', restaurantRoutes);
-app.use('/', authRoutes);
+app.use('/restaurants', restaurantRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/bookings', orderRoutes);
 app.use('/', dashboardRoutes);
 
 app.get('/', (req, res) => {
     res.redirect('/home');
 });
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard');
-});
-app.get('/sign-in', (req, res) => {
-    res.render('sign-in');
-});
-app.get('/sign-up', (req, res) => {
-    res.render('sign-up');
-});
+
 /*
 const Package = require('./models/packageModel');
 

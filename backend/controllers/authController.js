@@ -69,6 +69,6 @@ exports.logoutUser = (req, res) => {
             return res.redirect('/home'); // If there is an error, keep the user logged in
         }
         res.clearCookie('connect.sid');  // Clear the session cookie
-        return res.redirect('/sign-in');  // Redirect to the sign-in page
+        return res.redirect('/auth/sign-in');  // Redirect to the sign-in page
     });
 };
