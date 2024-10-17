@@ -10,6 +10,24 @@
 <body>
     <div class="Rest-container">
         <h2 class="page-title">Our Restaurants</h2>
+
+        <!-- Filter Section (Now placed above restaurants, below the title) -->
+        <div class="filter-container">
+            <form id="filterForm" action="/restaurants" method="GET">
+                <label for="cuisineSelect">Filter by Cuisine:</label>
+                <select id="cuisineSelect" name="cuisine">
+                    <option value="">All</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Lebanese">Lebanese</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="American">American</option>
+                </select>
+                <button type="submit" class="btnfilter">Filter</button>
+            </form>
+        </div>
+
+        <!-- Restaurant List Section -->
         <% if (restaurants.length === 0) { %>
             <p class="no-restaurant-message">No restaurants available at the moment.</p>
         <% } else { %>

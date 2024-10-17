@@ -1,13 +1,20 @@
 const Restaurant = require('../models/restaurantModel');
 const packageModel = require('../models/packageModel');
-// Function to get and display all restaurants
 exports.getRestaurants = async (req, res) => {
     try {
-        // Fetch all restaurants from the database
-        const restaurants = await Restaurant.find();
-        const user = req.session.user;
+        let query = {}; // Initialize an empty query object
+
+        // If a cuisine is selected, add it to the query
+        if (req.query.cuisine && req.query.cuisine !== "") {
+            query.cuisine = req.query.cuisine;
+        }
+
+        // Fetch restaurants based on the query
+        const restaurants = await Restaurant.find(query);
+
+        const user = req.session.user; // Get the user session if logged in
         // Render the EJS template and pass the restaurants data to it
-        res.render('restaurants', { restaurants , user });
+        res.render('restaurants', { restaurants, user });
     } catch (error) {
         console.error('Error fetching restaurants:', error);
         res.status(500).json({ message: 'Error fetching restaurants' });
