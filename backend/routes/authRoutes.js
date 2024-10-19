@@ -16,8 +16,6 @@ router.get('/logout', authController.logoutUser);
 router.get('/home', (req, res) => {
     // Check if the user is in the session
     const user = req.session.user;
-
-    // Render the home page and pass the user to the EJS template
     res.render('home', { user });
 });
 

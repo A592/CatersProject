@@ -1,19 +1,28 @@
+/* Define Color Palette in Root */
+:root {
+  --primary-color: #FFD700; /* Gold */
+  --secondary-color: #2C3E50; /* Dark Slate Blue */
+  --accent-color: #3498DB; /* Soft Blue */
+  --neutral-light-color: #F4F4F9; /* Off-White */
+  --neutral-dark-color: #333333; /* Dark Gray */
+  --error-color: #F08080; /* Light Coral */
+}
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: var(--neutral-light-color);
     margin: 0;
     padding: 0;
 }
 
 h1, h3 {
-    color: #333;
+    color: var(--neutral-dark-color);
 }
 
 p {
     color: #555;
 }
-
 
 .Catering {
   width: 100%;
@@ -33,32 +42,32 @@ p {
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   background: rgba(0, 0, 0, 0.5);
-  padding: 20px; /* Adjust padding for text size */
+  padding: 20px;
   border-radius: 10px;
-  font-size: 24px; /* Smaller font size */
+  font-size: 24px;
   text-align: center;
-  width: 80%; /* Make the text box smaller */
-  max-width: 600px; /* Ensure it doesn't grow too large on bigger screens */
+  width: 80%;
+  max-width: 600px;
 }
 
 .text p {
   font-weight: bold;
-  color: white;
-  font-size: 28px; /* Adjusted smaller font size */
+  color: var(--neutral-light-color);
+  font-size: 28px;
 }
 
 .text h3 {
   margin: 0;
-  color: white;
-  font-size: 22px; /* Adjusted smaller font size */
+  color: var(--neutral-light-color);
+  font-size: 22px;
 }
 
 .button {
   display: block;
   margin: 20px auto 0;
   padding: 10px 25px;
-  background-color: gold;
-  color: #000000;
+  background-color: var(--primary-color);
+  color: var(--neutral-dark-color);
   border: none;
   border-radius: 5px;
   font-size: 18px;
@@ -71,14 +80,15 @@ p {
 .button:hover {
   background-color: #b29600;
 }
-  .offers-section {
-    background-color: #f5f5f5; /* Light grey background */
+
+.offers-section {
+    background-color: var(--neutral-light-color); /* Light grey background */
     text-align: center;
     padding: 20px 0;
 }
 
 .offers-section h2 {
-    color: #333;
+    color: var(--neutral-dark-color);
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -94,7 +104,7 @@ p {
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 300px; /* Adjust based on your preference */
+    width: 300px;
     padding: 15px;
     text-align: left;
 }
@@ -106,7 +116,7 @@ p {
 }
 
 .offer h3 {
-    color: #333;
+    color: var(--neutral-dark-color);
     font-size: 18px;
     margin-top: 10px;
 }
@@ -118,8 +128,8 @@ p {
 }
 
 .order-button {
-    background-color: #ffa500; /* Matching the button color on your homepage */
-    color: white;
+    background-color: var(--primary-color); /* Primary color */
+    color: var(--neutral-light-color);
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -128,58 +138,58 @@ p {
 }
 
 .order-button:hover {
-    background-color: #cc8400; /* Darker shade on hover */
+    background-color: #b29600; /* Darker shade on hover */
 }
 
 /* Large screens (desktops, laptops) */
 @media (min-width: 1200px) {
   .text {
-      font-size: 40px; /* Increase font size for large screens */
+      font-size: 40px;
   }
 
   .offers-container {
-      gap: 40px; /* Increase space between offers */
+      gap: 40px;
   }
 
   .offer {
-      width: 350px; /* Increase offer card size for large screens */
+      width: 350px;
   }
 }
 
 /* Medium screens (tablets, small laptops) */
 @media (min-width: 768px) and (max-width: 1199px) {
   .text {
-      font-size: 28px; /* Adjust font size for medium screens */
+      font-size: 28px;
   }
 
   .offers-container {
-      flex-wrap: wrap; /* Wrap offers for medium screens */
+      flex-wrap: wrap;
       justify-content: space-around;
   }
 
   .offer {
-      width: 45%; /* Adjust offer card size for medium screens */
+      width: 45%;
   }
 }
 
 /* Small screens (mobile devices) */
 @media (max-width: 767px) {
   .text {
-      font-size: 24px; /* Smaller font size for small screens */
-      padding: 10px; /* Add padding for mobile */
+      font-size: 24px;
+      padding: 10px;
   }
 
   .button {
-      font-size: 16px; /* Reduce button font size for mobile */
+      font-size: 16px;
       padding: 8px 20px;
   }
 
   .offers-container {
-      flex-direction: column; /* Stack offers vertically */
+      flex-direction: column;
       gap: 15px;
   }
 
   .offer {
-      width: 100%; /* Full width for small screens */
+      width: 100%;
   }
 }

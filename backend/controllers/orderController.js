@@ -48,6 +48,63 @@ exports.submitBooking = async (req, res) => {
           res.status(500).json({ success: false, message: 'Failed to process booking' });
       }
   };
+  exports.storeBooking = (req, res) => {
+    const { packageType, numPeople, totalPrice, restaurantId } = req.body;
+
+    // Store the booking data in the session
+    req.session.booking = {
+        packageType,
+        numPeople,
+        totalPrice,
+        restaurantId
+    };
+
+    res.redirect('/api/bookings/payment');
+};
+
+exports.renderPaymentPage = (req, res) => {
+    const booking = req.session.booking;
+
+    if (!booking) {
+        return res.redirect('/restaurants');  // Redirect if no booking information in session
+    }
+
+    res.render('payment', { booking });
+};
+
+exports.confirmPayment = async (req, res) => {
+    const { packageType, numPeople, totalPrice, restaurantId } = req.body;
+    const user = req.session.user;
+
+    if (!user) {
+        return res.status(401).json({ success: false, message: 'User not authenticated', redirectUrl: '/auth/sign-in' });
+    }
+
+    try {
+        const newOrder = new Order({
+            packageType,
+            numPeople,
+            totalPrice,
+            user: user._id,
+            restaurant: restaurantId
+        });
+
+        await newOrder.save();
+
+        // Clear the session booking data after saving
+        req.session.booking = null;
+
+        res.json({
+            success: true,
+            message: 'Payment successful. Booking confirmed!',
+            redirectUrl: '/home'
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to confirm payment' });
+    }
+};
+
   exports.updateOrderStatus = async (req, res) => {
     try {
         const { orderId } = req.params;
