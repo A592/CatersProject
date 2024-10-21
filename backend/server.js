@@ -50,7 +50,8 @@ app.use('/api/bookings', orderRoutes);
 app.use('/', dashboardRoutes);
 
 app.get('/', (req, res) => {
-    res.redirect('/home');
+    const user = req.session.user;
+    res.render('home', { user });
 });
 
 /*

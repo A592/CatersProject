@@ -23,11 +23,16 @@ const orderSchema = new mongoose.Schema({
         ref: 'Restaurant',
         required: true
     },
+    dateTime: {
+        type: Date,
+        required: true
+    },
     status: {
         type: String,
         enum: ['Pending', 'In Progress', 'Completed'],  // You can add more statuses here
         default: 'Pending'
     },
+
     createdAt: {
         type: Date,
         default: Date.now

@@ -49,22 +49,23 @@ exports.submitBooking = async (req, res) => {
       }
   };
   exports.storeBooking = (req, res) => {
-    const { packageType, numPeople, totalPrice, restaurantId } = req.body;
+    const { packageType, numPeople, totalPrice, restaurantId, dateTime } = req.body;
 
     // Store the booking data in the session
     req.session.booking = {
         packageType,
         numPeople,
         totalPrice,
-        restaurantId
+        restaurantId, 
+        dateTime
     };
-
+  
     res.redirect('/api/bookings/payment');
 };
 
 exports.renderPaymentPage = (req, res) => {
     const booking = req.session.booking;
-
+    //console.log(booking);
     if (!booking) {
         return res.redirect('/restaurants');  // Redirect if no booking information in session
     }
@@ -73,8 +74,9 @@ exports.renderPaymentPage = (req, res) => {
 };
 
 exports.confirmPayment = async (req, res) => {
-    const { packageType, numPeople, totalPrice, restaurantId } = req.body;
+    const { packageType, numPeople, totalPrice, restaurantId, dateTime } = req.body;
     const user = req.session.user;
+    const date = req.session.booking;
 
     if (!user) {
         return res.status(401).json({ success: false, message: 'User not authenticated', redirectUrl: '/auth/sign-in' });
@@ -86,8 +88,10 @@ exports.confirmPayment = async (req, res) => {
             numPeople,
             totalPrice,
             user: user._id,
-            restaurant: restaurantId
+            restaurant: restaurantId,
+            dateTime: date.dateTime
         });
+
 
         await newOrder.save();
 

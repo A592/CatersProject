@@ -17,11 +17,11 @@
                 <ul>
                     <li>
                         <span>Subtotal</span>
-                        <span>$<%= booking.totalPrice %></span>
+                        <span>$<%= booking.totalPrice - (booking.totalPrice * 0.015) %></span>
                     </li>
                     <li>
                         <span>Tax</span>
-                        <span>$<%=booking.totalPrice * 0.015 %></span>
+                        <span>$<%= booking.totalPrice * 0.015  %></span>
                     </li>
                     <li class="total">
                         <span>Total</span>
