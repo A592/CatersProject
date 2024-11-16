@@ -1,0 +1,39 @@
+/* src/components/css/sign.css */
+
+/* Adjust card styling */
+.card {
+    margin-top: 20px;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+  
+  .alert {
+    margin-bottom: 20px;
+  }
+  
+  /* Center the page title */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Adjust input placeholders */
+  ::placeholder {
+    color: #a0a0a0;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #a0a0a0;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #a0a0a0;
+  }
+  

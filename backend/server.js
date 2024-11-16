@@ -5,17 +5,23 @@ const path = require('path');
 const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
+const cors = require('cors');
+app.options('*', cors());  // Allows OPTIONS requests from all origins
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+}));
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set up EJS as the template engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+
 
 // Static folder for public files like CSS
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 
 // MongoDB connection
@@ -44,15 +50,14 @@ const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 
+
 app.use('/restaurants', restaurantRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/bookings', orderRoutes);
 app.use('/', dashboardRoutes);
 
-app.get('/', (req, res) => {
-    const user = req.session.user;
-    res.render('home', { user });
-});
+
+
 
 /*
 const Package = require('./models/packageModel');

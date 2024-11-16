@@ -1,0 +1,66 @@
+/* src/components/css/myOrder.css */
+
+/* Container Styling */
+.my-orders-container {
+  margin-bottom: 40px;
+}
+
+/* Headings */
+.my-orders-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.my-orders-container h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #212529;
+  margin-top: 40px;
+}
+
+/* Alert Messages */
+.alert-info {
+  font-size: 1.1rem;
+}
+
+/* Table Styling */
+.table {
+  margin-bottom: 0;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Badge Styling */
+.badge {
+  font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .my-orders-container h1 {
+    font-size: 2rem;
+  }
+
+  .my-orders-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .my-orders-container {
+    padding: 0 15px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.85rem;
+  }
+}

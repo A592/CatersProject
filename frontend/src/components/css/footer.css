@@ -1,0 +1,28 @@
+/* src/components/css/footer.css */
+
+/* Social Icons Styling */
+.social-icon {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #28a745; /* Change color on hover (green) */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Footer Links Hover Effect */
+.footer-section a:hover {
+  color: #28a745; /* Green color on hover */
+  text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+  }
+
+  .social-icon {
+    margin-bottom: 10px;
+  }
+}

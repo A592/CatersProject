@@ -1,0 +1,73 @@
+/* src/components/css/menu.css */
+
+/* Restaurant image styling */
+.restaurant-image {
+    max-width: 200px;
+  }
+  
+  /* Package image styling */
+  .package-image {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Highlight selected package */
+  .package-card.border-primary {
+    border-width: 2px !important;
+  }
+  
+  /* Active button styling */
+  .btn-outline-primary.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Total price styling */
+  .total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Spinner alignment */
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  /* Ensure card text is black */
+  .card-text {
+    color: black;
+  }
+  
+  /* Center cards */
+  .row.justify-content-center {
+    justify-content: center !important;
+  }
+  
+  /* Number input group styling */
+  .number-input-group {
+    max-width: 200px;
+  }
+  
+  .number-input-group .form-control {
+    width: 60px;
+  }
+  
+  .number-input-group .btn {
+    width: 40px;
+  }
+/* src/components/css/menu.css */
+
+/* Existing styles... */
+
+/* Hide arrows in number input */
+.number-input-group input[type=number]::-webkit-inner-spin-button, 
+.number-input-group input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.number-input-group input[type=number] {
+  -moz-appearance: textfield;
+}
+  

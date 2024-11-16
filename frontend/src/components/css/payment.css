@@ -1,0 +1,47 @@
+/* src/components/css/payment.css */
+
+/* Adjust list group items */
+.list-group-item {
+    border: none;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
+  
+  .font-weight-bold {
+    font-weight: bold;
+  }
+  
+  /* Ensure labels are left-aligned */
+  .card .form-group label {
+    text-align: left;
+    display: block;
+  }
+  
+  /* Remove any centering from inputs */
+  .card .form-group {
+    text-align: left;
+  }
+  
+  /* Make inputs full width */
+  .card .form-group input.form-control {
+    width: 100%;
+  }
+  
+  /* SweetAlert2 customization (if needed) */
+  .swal2-popup {
+    font-size: 1.1rem;
+  }
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .card-header h4, .card-body h4 {
+      font-size: 1.25rem;
+    }
+  }
+  
+ 
+    
