@@ -1,56 +1,24 @@
 const Order = require('../models/orderModel');
 const User = require('../models/userModel');
 const Restaurant = require('../models/restaurantModel');
-// controllers/paymentController.js
+require('dotenv').config();
+const nodemailer = require('nodemailer');
+const { paymentConfirmationEmail } = require('../templates/emailTemplates');
 
+const transporter = nodemailer.createTransport({
+    secure:true,
+    host:'smtp.gmail.com',
+    port:465,
+    // e.g., 'gmail'
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
 
   
 // Controller method to handle booking submission
-exports.confirmPayment = async (req, res) => {
-    const { cardName, cardNumber, expDate, cvv } = req.body; // Payment details
-    const user = req.session.user;
-    const booking = req.session.booking;
 
-    // Validate user and booking
-    if (!user) {
-        return res.status(401).json({ success: false, message: 'User not authenticated.' });
-    }
-
-    if (!booking) {
-        return res.status(400).json({ success: false, message: 'No booking data found.' });
-    }
-
-    // Here, integrate with a payment gateway like Stripe or PayPal.
-    // For simplicity, we'll assume the payment is successful.
-
-    try {
-        // Create and save the order
-        const newOrder = new Order({
-            packageType: booking.packageType,
-            numPeople: booking.numPeople,
-            totalPrice: booking.totalPrice,
-            user: user._id,
-            restaurant: booking.restaurantId,
-            dateTime: booking.dateTime,
-            // Add additional fields if necessary
-        });
-
-        await newOrder.save();
-
-       
-        // Clear booking data from session
-        req.session.booking = null;
-
-        res.json({
-            success: true,
-            message: 'Payment successful. Booking confirmed!',
-            redirectUrl: '/home', // Frontend route
-        });
-    } catch (error) {
-        console.error('Error confirming payment:', error);
-        res.status(500).json({ success: false, message: 'Server error while confirming payment.' });
-    }
-};
 
   exports.storeBooking = async (req, res) => {
     const { packageType, numPeople, totalPrice, restaurantId, dateTime } = req.body;
@@ -120,7 +88,22 @@ exports.confirmPayment = async (req, res) => {
 
 
         await newOrder.save();
-
+   
+        const mailOptions = {
+            from: `"Caters" <${process.env.EMAIL_USER}>`,
+            to: user.email,
+            subject: 'Payment Confirmation - Order #' + newOrder._id,
+            html: paymentConfirmationEmail(newOrder,user),
+          };
+    
+          transporter.sendMail(mailOptions,(error, info) => {
+            if (error) {
+              console.error('Error sending email:', error);
+              // You might want to handle this error, but not necessarily fail the payment process
+            } else {
+              console.log('Email sent:', info.response);
+            }
+          });
         // Clear the session booking data after saving
         req.session.booking = null;
 

@@ -56,8 +56,31 @@ app.use('/auth', authRoutes);
 app.use('/api/bookings', orderRoutes);
 app.use('/', dashboardRoutes);
 
+/*
+const nodemailer = require('nodemailer');
+const { paymentConfirmationEmail } = require('../templates/emailTemplates');
+const transporter = nodemailer.createTransport({
+    secure:true,
+    host:'smtp.gmail.com',
+    port:465,
+    // e.g., 'gmail'
+    auth: {
+      user: 'catersksa@gmail.com',
+      pass: 'ohhqbocbnsqrpfzk',
+    },
+  });
 
 
+  function sendMail(to,sub,msg){
+    transporter.sendMail({
+        to:to,
+        subject:sub,
+        html:msg
+    });
+  }
+
+  sendMail("abdullahoalaskar@gmail.com","Welcome","Test!");
+*/
 
 /*
 const Package = require('./models/packageModel');
