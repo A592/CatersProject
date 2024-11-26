@@ -30,7 +30,7 @@
   
   /* Style for Order Now button */
   .btn-order {
-    background-color: #28a745; /* Green background */
+    background-color: #007bff; /* Green background */
     color: #fff; /* White text */
     border: none;
     border-radius: 25px; /* Pill-shaped button */
@@ -44,7 +44,7 @@
   }
   
   .btn-order:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: white; /* Darker green on hover */
     transform: translateY(-3px); /* Slight lift on hover */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   }

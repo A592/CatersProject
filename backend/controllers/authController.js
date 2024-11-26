@@ -41,7 +41,7 @@ exports.loginUser = async (req, res) => {
         }
 
         req.session.user = user; // Optional: Consider moving to token-based session management
-
+        console.log(user);
         return res.status(200).json({
             message: 'Login successful!',
             success: true,

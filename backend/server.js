@@ -56,6 +56,7 @@ app.use('/auth', authRoutes);
 app.use('/api/bookings', orderRoutes);
 app.use('/', dashboardRoutes);
 
+
 /*
 const nodemailer = require('nodemailer');
 const { paymentConfirmationEmail } = require('../templates/emailTemplates');

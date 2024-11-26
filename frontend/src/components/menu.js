@@ -4,6 +4,7 @@ import './css/menu.css';
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Flatpickr from 'react-flatpickr';
+import Swal from 'sweetalert2';
 import 'flatpickr/dist/flatpickr.min.css';
 import { AuthContext } from '../context/AuthContext';
 
@@ -65,7 +66,12 @@ const Menu = () => {
       return;
     }
     if (!user) {
-      alert('You must be logged in to confirm a booking.');
+      //alert('You must be logged in to confirm a booking.');
+      Swal.fire({
+        title: 'Error',
+        text: 'You need to login',
+        icon: 'error',
+      });
       navigate('/auth/sign-in'); // Redirect to sign-in page
       return;
     }

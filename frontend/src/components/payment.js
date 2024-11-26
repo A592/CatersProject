@@ -94,7 +94,7 @@ const Payment = () => {
           timer: 5000,
           showConfirmButton: false,
         }).then(() => {
-          navigate('/home'); // Redirect to home page
+          navigate('/'); // Redirect to home page
         });
       } else {
         Swal.fire({

@@ -4,174 +4,181 @@
 
 /* Make the navbar background solid black */
 .custom-navbar {
-    background-color: #313030; /* Solid black */
-    transition: background-color 0.3s ease;
+  background-color: #313030; /* Solid black */
+  transition: background-color 0.3s ease;
+}
+
+/* Increase the header size */
+.navbar {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+/* Adjust the navbar brand */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.8rem; /* Increased font size */
+}
+
+.logo-text {
+  font-size: 1.5rem; /* Increased font size */
+  color: #fff;
+}
+
+/* Center the navbar links */
+.navbar-nav {
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 1rem; /* Match the size in the image */
+  font-weight: 500;
+  color: #000000; /* Black text */
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item .nav-link:focus {
+  color: #fff;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Adjust the profile dropdown button */
+.btn-secondary {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.btn-secondary .rounded-circle {
+  border: 2px solid #fff;
+}
+
+/* Adjust dropdown menu */
+.dropdown-menu-custom {
+  min-width: 220px;
+  border-radius: 5px;
+  padding: 10px 0;
+  background-color: #fff; /* White background for dropdown */
+  color: #000; /* Black text */
+  /* Shift the dropdown menu slightly to the left */
+  right: 0;
+  left: auto;
+  transform: translateX(-10px); /* Adjust the value as needed */
+}
+
+/* Smooth transition for dropdown menu */
+.dropdown-menu-custom.show {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px) translateX(-10px); }
+  to { opacity: 1; transform: translateY(0) translateX(-10px); }
+}
+
+/* Enhance the dropdown items */
+.dropdown-item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+/* Profile image in dropdown */
+.dropdown-item-text img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/* Logo image adjustment */
+.navbar-brand img {
+  object-fit: cover;
+  border-radius: 50%; /* Optional: Make logo circular if applicable */
+}
+
+/* Ensure the navbar does not overlap with page content */
+
+
+/* Adjust the sign-in button */
+.btn-outline-light {
+  color: #fff;
+  border-color: #fff;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline-light:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+/* Remove outline on button focus */
+.btn:focus,
+.btn:active:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* Adjust navbar toggler */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Normal dropdown menu styling */
+
+
+/* Responsive adjustments for profile dropdown */
+@media (max-width: 992px) {
+  .navbar-toggler[aria-expanded="true"] ~ .dropdown-menu-custom {
+    transform: translateX(200px); /* Shift when open */
+    transition: transform 0.3s ease;
   }
-  
-  /* Increase the header size */
-  .navbar {
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
-  }
-  
-  /* Adjust the navbar brand */
-  .navbar-brand {
-    font-weight: bold;
-    font-size: 1.8rem; /* Increased font size */
-  }
-  
-  .logo-text {
-    font-size: 1.5rem; /* Increased font size */
-    color: #fff;
-  }
-  
-  /* Center the navbar links */
-  .navbar-nav {
-    align-items: center;
-  }
-  
-  .navbar-nav .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 30px; /* Increased font size */
-    transition: color 0.2s ease;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
-  
-  .navbar-nav .nav-item .nav-link:hover,
-  .navbar-nav .nav-item .nav-link:focus {
-    color: #fff;
-  }
-  
-  .navbar-nav .nav-item {
-    margin-left: 15px;
-    margin-right: 15px;
-  }
-  
-  /* Adjust the profile dropdown button */
-  .btn-secondary {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-  }
-  
-  .btn-secondary:hover,
-  .btn-secondary:focus {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-  }
-  
-  .btn-secondary .rounded-circle {
-    border: 2px solid #fff;
-  }
-  
-  /* Adjust dropdown menu */
-  .dropdown-menu-custom {
-    min-width: 220px;
-    border-radius: 5px;
-    padding: 10px 0;
-    background-color: #fff; /* White background for dropdown */
-    color: #000; /* Black text */
-    /* Shift the dropdown menu slightly to the left */
+  .dropdown-menu-end {
     right: 0;
     left: auto;
-    transform: translateX(-10px); /* Adjust the value as needed */
+  }
+  /* Shift the dropdown menu slightly to the left on smaller screens */
+  .dropdown-menu-custom {
+    transform: translateX(200px); /* Less shift on smaller screens */
   }
   
-  /* Smooth transition for dropdown menu */
-  .dropdown-menu-custom.show {
-    animation: fadeIn 0.3s;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px) translateX(-10px); }
-    to { opacity: 1; transform: translateY(0) translateX(-10px); }
-  }
-  
-  /* Enhance the dropdown items */
-  .dropdown-item {
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: #000;
-  }
-  
-  /* Profile image in dropdown */
-  .dropdown-item-text img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-  }
-  
-  /* Logo image adjustment */
-  .navbar-brand img {
-    object-fit: cover;
-    border-radius: 50%; /* Optional: Make logo circular if applicable */
-  }
-  
-  /* Ensure the navbar does not overlap with page content */
-  
-  
-  /* Adjust the sign-in button */
-  .btn-outline-light {
-    color: #fff;
-    border-color: #fff;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .btn-outline-light:hover {
-    color: #000;
-    background-color: #fff;
-    border-color: #fff;
-  }
-  
-  /* Remove outline on button focus */
-  .btn:focus,
-  .btn:active:focus {
-    box-shadow: none;
-    outline: none;
-  }
-  
-  /* Adjust navbar toggler */
-  .navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
-  
-  /* Responsive adjustments for profile dropdown */
-  @media (max-width: 992px) {
-    .dropdown-menu-end {
-      right: 0;
-      left: auto;
-    }
-  
-    /* Shift the dropdown menu slightly to the left on smaller screens */
-    .dropdown-menu-custom {
-      transform: translateX(-5px); /* Less shift on smaller screens */
-    }
-  }
-  
-  /* Additional styling for better design */
-  
-  /* Profile image in dropdown */
-  .dropdown-item-text img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-  }
-  
-  /* Logo image adjustment */
-  .navbar-brand img {
-    object-fit: cover;
-  }
-  
-  /* Optional: Invert profile icon colors if needed */
-  .profile-icon-invert {
-    filter: invert(1);
-  }
-  
+}
+
+/* Additional styling for better design */
+
+/* Profile image in dropdown */
+.dropdown-item-text img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/* Logo image adjustment */
+.navbar-brand img {
+  object-fit: cover;
+}
+
+/* Optional: Invert profile icon colors if needed */
+.profile-icon-invert {
+  filter: invert(1);
+}
