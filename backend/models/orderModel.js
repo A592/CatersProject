@@ -32,7 +32,14 @@ const orderSchema = new mongoose.Schema({
         enum: ['Pending', 'In Progress', 'Completed','Canceled'],  // You can add more statuses here
         default: 'Pending'
     },
-
+    includeEquipment: {
+        type: Boolean,
+        default: false, // Default to not including equipment
+    },
+    equipmentCost: {
+        type: Number,
+        default: 0, // Default equipment cost
+    },
     createdAt: {
         type: Date,
         default: Date.now

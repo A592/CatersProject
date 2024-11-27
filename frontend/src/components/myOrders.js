@@ -47,7 +47,7 @@ const MyOrders = () => {
     };
 
     fetchOrders();
-  }, [logout, navigate]);
+  }, [logout, navigate,user]);
 
   const getBase64 = (imgUrl) => {
     return new Promise((resolve, reject) => {

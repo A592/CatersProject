@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 
   exports.storeBooking = async (req, res) => {
-    const { packageType, numPeople, totalPrice, restaurantId, dateTime } = req.body;
+    const { packageType, numPeople, totalPrice, restaurantId, dateTime, includeEquipment } = req.body;
 
     // Validate input
     if (!packageType || !numPeople || !totalPrice || !restaurantId || !dateTime) {
@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
         if (!user) {
             return res.status(401).json({ success: false, message: 'User not authenticated.' });
         }
-
+        const equipmentCost = includeEquipment ? numPeople * 30 : 0;
         // Store booking data in session
         req.session.booking = {
             packageType,
@@ -48,6 +48,8 @@ const transporter = nodemailer.createTransport({
             totalPrice,
             restaurantId,
             dateTime,
+            includeEquipment,
+            equipmentCost
         };
 
         res.json({ success: true, message: 'Booking data stored successfully.' });
@@ -70,7 +72,7 @@ exports.getBooking = (req, res) => {
 exports.confirmPayment = async (req, res) => {
     const { packageType, numPeople, totalPrice, restaurantId, dateTime } = req.body;
     const user = req.session.user;
-    const date = req.session.booking;
+    const booking = req.session.booking;
 
     if (!user) {
         return res.status(401).json({ success: false, message: 'User not authenticated', redirectUrl: '/auth/sign-in' });
@@ -83,7 +85,9 @@ exports.confirmPayment = async (req, res) => {
             totalPrice,
             user: user._id,
             restaurant: restaurantId,
-            dateTime: dateTime
+            dateTime: dateTime,
+            includeEquipment: booking.includeEquipment, // Include equipment details
+            equipmentCost: booking.equipmentCost,  
         });
 
 

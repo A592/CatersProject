@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 const Menu = () => {
   const { restaurantId } = useParams();
   const navigate = useNavigate();
-
+  const [includeEquipment, setIncludeEquipment] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
   const [packages, setPackages] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -49,12 +49,13 @@ const Menu = () => {
 
   // Calculate total price
   useEffect(() => {
+    const equipmentCost = includeEquipment ? numPeople * 30 : 0; // Add $50 if equipment is included
     if (selectedPackage && numPeople > 0) {
-      setTotalPrice(selectedPackage.price * numPeople);
+      setTotalPrice(selectedPackage.price * numPeople + equipmentCost);
     } else {
-      setTotalPrice(0);
+      setTotalPrice(equipmentCost);
     }
-  }, [selectedPackage, numPeople]);
+  }, [selectedPackage, numPeople, includeEquipment]);
 
   // Handle package selection
   const handlePackageChange = (pkg) => setSelectedPackage(pkg);
@@ -98,6 +99,7 @@ const Menu = () => {
           totalPrice,
           restaurantId: restaurant._id,
           dateTime,
+          includeEquipment
         }),
       });
 
@@ -183,9 +185,8 @@ const Menu = () => {
           packages.map((pkg) => (
             <div className="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch" key={pkg._id}>
               <div
-                className={`card h-100 package-card ${
-                  selectedPackage && selectedPackage._id === pkg._id ? 'border-primary' : ''
-                }`}
+                className={`card h-100 package-card ${selectedPackage && selectedPackage._id === pkg._id ? 'border-primary' : ''
+                  }`}
               >
                 <img src={pkg.image} alt={pkg.name} className="card-img-top package-image" />
                 <div className="card-body d-flex flex-column">
@@ -196,9 +197,8 @@ const Menu = () => {
                   </p>
                   <div className="mt-auto">
                     <button
-                      className={`btn btn-outline-primary btn-block ${
-                        selectedPackage && selectedPackage._id === pkg._id ? 'active' : ''
-                      }`}
+                      className={`btn btn-outline-primary btn-block ${selectedPackage && selectedPackage._id === pkg._id ? 'active' : ''
+                        }`}
                       onClick={() => handlePackageChange(pkg)}
                     >
                       {selectedPackage && selectedPackage._id === pkg._id ? 'Selected' : 'Select Package'}
@@ -255,7 +255,17 @@ const Menu = () => {
                     </div>
                   </div>
                 </div>
-
+                <div className="form-group">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={includeEquipment}
+                      onChange={() => setIncludeEquipment(!includeEquipment)}
+                    />
+                    {' '}
+                    Include Equipment (Chairs, Tables): $30 per person
+                  </label>
+                </div>
                 <div className="form-group">
                   <label htmlFor="dateTime">Date and Time:</label>
                   <Flatpickr
