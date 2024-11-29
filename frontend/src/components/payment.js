@@ -153,15 +153,19 @@ const Payment = () => {
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-between">
                   <span>Subtotal</span>
-                  <span>${(booking.totalPrice - booking.totalPrice * 0.015).toFixed(2)}</span>
+                  <span>${((booking.totalPrice - booking.equipmentCost)-(booking.totalPrice-booking.equipmentCost)*0.15).toFixed(2)}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                  <span>Equipment</span>
+                  <span>${(booking.equipmentCost - (booking.equipmentCost * 0.15))}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between">
                   <span>Tax</span>
-                  <span>${(booking.totalPrice * 0.015).toFixed(2)}</span>
+                  <span>${(booking.totalPrice * 0.15).toFixed(2)}</span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between font-weight-bold">
                   <span>Total</span>
-                  <span>${booking.totalPrice.toFixed(2)}</span>
+                  <span>${(booking.totalPrice).toFixed(2)}</span>
                 </li>
               </ul>
             </div>
@@ -235,7 +239,7 @@ const Payment = () => {
                   </div>
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
-                  Pay ${booking.totalPrice.toFixed(2)}
+                  Pay ${(booking.totalPrice).toFixed(2)}
                 </button>
               </div>
             </div>

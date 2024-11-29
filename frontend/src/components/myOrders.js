@@ -125,13 +125,37 @@ const MyOrders = () => {
         tableLineColor: [0, 0, 0], // Black border
         tableLineWidth: 0.1,
       });
+      const taxRate = 0.15;
+      const equipmentCost = order.equipmentCost; // Equipment cost is given
+       // Tax rate is 15%
+      // Calculate the package price (excluding tax)
+const packageTotal = ((order.totalPrice - equipmentCost) - (order.totalPrice - equipmentCost)*taxRate).toFixed(2);
 
-      // Total Price
-      const totalY = doc.lastAutoTable.finalY + 10;
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'bold');
-      doc.text(`Total Price: $${order.totalPrice.toFixed(2)}`, 14, totalY);
+// Calculate the tax amount
+const tax = (order.totalPrice * taxRate);
 
+// Format the total price for display
+const grandTotal = order.totalPrice.toFixed(2);
+    // Cost Breakdown Table
+    const breakdownY = doc.lastAutoTable.finalY + 10;
+    const breakdownColumn = ['Description', 'Amount (USD)'];
+    const breakdownRows = [
+      ['Package Total', `$${packageTotal}`],
+      ['Equipment Cost', `$${equipmentCost - (order.equipmentCost * taxRate)}`],
+      ['Tax (15%)', `$${tax}`],
+      ['Grand Total', `$${grandTotal}`],
+    ];
+
+    doc.autoTable({
+      startY: breakdownY,
+      head: [breakdownColumn],
+      body: breakdownRows,
+      theme: 'grid',
+      styles: { fontSize: 12 },
+      headStyles: { fillColor: [41, 128, 185] },
+      tableLineColor: [0, 0, 0],
+      tableLineWidth: 0.1,
+    });
       // Footer with Company Information
       const pageHeight = doc.internal.pageSize.getHeight();
       doc.setFontSize(10);
@@ -230,6 +254,7 @@ const MyOrders = () => {
                 <th>Package</th>
                 <th>Restaurant</th>
                 <th>Number of People</th>
+                <th>Equipment Cost</th>
                 <th>Total Price</th>
                 <th>Status</th>
                 <th>Ordered On</th>
@@ -242,6 +267,7 @@ const MyOrders = () => {
                   <td>{order.packageType}</td>
                   <td>{order.restaurant.name}</td>
                   <td>{order.numPeople}</td>
+                  <td>{order.equipmentCost}</td>
                   <td>${order.totalPrice.toFixed(2)}</td>
                   <td>
                     <span
