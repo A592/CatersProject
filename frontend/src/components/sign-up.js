@@ -1,5 +1,3 @@
-// src/components/SignUp.js
-
 import './css/sign.css'; 
 import React, { useState } from 'react';
 import { signUp } from '../utils/api';
@@ -10,13 +8,14 @@ const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); // Added phoneNumber state
   const [role, setRole] = useState('user');
   const [error, setError] = useState(null);
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const formData = { name, email, password, role };
+      const formData = { name, email, password, phoneNumber, role }; // Include phoneNumber in formData
       const { data } = await signUp(formData);
       if (data.success) {
         console.log('User registered successfully!');
@@ -60,6 +59,18 @@ const SignUp = () => {
                     placeholder="Enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    className="form-control"
+                    placeholder="Enter phone number"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     required
                   />
                 </div>

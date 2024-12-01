@@ -30,7 +30,7 @@ const Home = () => {
               <div className="position-relative">
                 <img src="/imgs/homepage.jpg" alt="Discount on Group Bookings" className="card-img-top offer-image" loading="lazy" />
                 <div className="offer-overlay d-flex flex-column justify-content-end p-4">
-                  <h5 className="offer-title">Discount on Group Bookings!</h5>
+                  <h5 className="offer-title">Discount 50% Wenseday!</h5>
                   <p className="offer-description">Book for more than 10 people and get a 15% discount.</p>
                   <button className="btn btn-order" aria-label="Book Now">
                     Book Now <FaArrowRight className="ms-2" />

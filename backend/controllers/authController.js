@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 // Register a new user
 exports.registerUser = async (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, phoneNumber, role } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -12,7 +12,7 @@ exports.registerUser = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword, role });
+        const newUser = new User({ name, email, password: hashedPassword, phoneNumber, role });
 
         await newUser.save();
         return res.status(201).json({ message: 'User registered successfully', success: true });
