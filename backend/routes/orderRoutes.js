@@ -11,8 +11,6 @@ router.get('/myOrders', orderController.getUserOrders);
 
 router.get('/getBooking', orderController.getBooking);
 
-
-
 router.post('/storeBooking', orderController.storeBooking);
 
 router.post('/confirmPayment', orderController.confirmPayment);

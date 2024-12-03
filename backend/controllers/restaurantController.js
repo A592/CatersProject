@@ -1,6 +1,6 @@
 const Restaurant = require('../models/restaurantModel');
 const packageModel = require('../models/packageModel');
-// controllers/restaurantController.js
+
 
 
 
@@ -22,7 +22,7 @@ exports.getRestaurants = async (req, res) => {
 };
 
 
-// controllers/restaurantController.js
+
 
 exports.getRestaurantMenu = async (req, res) => {
     const restaurantId = req.params.restaurantId;

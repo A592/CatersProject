@@ -5,23 +5,12 @@ const path = require('path');
 const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const cors = require('cors');
-app.options('*', cors());  // Allows OPTIONS requests from all origins
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: 'GET,POST,PUT,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type,Authorization',
-    credentials: true
-}));
+
+
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Set up EJS as the template engine
-
-
-// Static folder for public files like CSS
-//app.use(express.static(path.join(__dirname, 'public')));
 
 
 // MongoDB connection

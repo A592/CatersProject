@@ -1,8 +1,6 @@
-// src/components/Footer.js
-
 import React from 'react';
-import './css/footer.css'; // Include your custom styles
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'; // Using react-icons for social icons
+import './css/footer.css'; 
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'; 
 
 const Footer = () => {
   return (

@@ -1,5 +1,3 @@
-// src/components/Home.js
-
 import React from 'react';
 import './css/styles.css';
 import { FaArrowRight } from 'react-icons/fa';
@@ -23,7 +21,7 @@ const Home = () => {
       <div className="container my-5">
         <h2 className="text-center mb-5 special-offers-heading">Special Offers</h2>
         <div className="row g-5">
-          
+
           {/* Offer 1 - Discount on Group Bookings */}
           <div className="col-md-4">
             <div className="card offer-card">
@@ -39,7 +37,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Offer 2 - Early Bird Special */}
           <div className="col-md-4">
             <div className="card offer-card">
@@ -55,7 +53,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Offer 3 - Weekend Gala */}
           <div className="col-md-4">
             <div className="card offer-card">

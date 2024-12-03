@@ -8,14 +8,14 @@ const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); // Added phoneNumber state
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [role, setRole] = useState('user');
   const [error, setError] = useState(null);
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const formData = { name, email, password, phoneNumber, role }; // Include phoneNumber in formData
+      const formData = { name, email, password, phoneNumber, role };
       const { data } = await signUp(formData);
       if (data.success) {
         console.log('User registered successfully!');
@@ -104,7 +104,7 @@ const SignUp = () => {
                 </button>
               </form>
               <p className="mt-3 text-center">
-                Already have an account? <a href="/signin">Sign In</a>
+                Already have an account? <a href="/auth/sign-in">Sign In</a>
               </p>
             </div>
           </div>

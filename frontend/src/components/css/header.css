@@ -79,7 +79,7 @@
   transform: translateX(-10px); /* Adjust the value as needed */
 }
 
-/* Smooth transition for dropdown menu */
+
 .dropdown-menu-custom.show {
   animation: fadeIn 0.3s;
 }
@@ -112,7 +112,7 @@
   border-radius: 50%; /* Optional: Make logo circular if applicable */
 }
 
-/* Ensure the navbar does not overlap with page content */
+
 
 
 /* Adjust the sign-in button */
@@ -144,41 +144,21 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Normal dropdown menu styling */
 
 
-/* Responsive adjustments for profile dropdown */
-@media (max-width: 992px) {
-  .navbar-toggler[aria-expanded="true"] ~ .dropdown-menu-custom {
-    transform: translateX(200px); /* Shift when open */
-    transition: transform 0.3s ease;
-  }
-  .dropdown-menu-end {
-    right: 0;
-    left: auto;
-  }
-  /* Shift the dropdown menu slightly to the left on smaller screens */
-  .dropdown-menu-custom {
-    transform: translateX(200px); /* Less shift on smaller screens */
-  }
-  
-}
 
-/* Additional styling for better design */
-
-/* Profile image in dropdown */
 .dropdown-item-text img {
   width: 60px;
   height: 60px;
   object-fit: cover;
 }
 
-/* Logo image adjustment */
+
 .navbar-brand img {
   object-fit: cover;
 }
 
-/* Optional: Invert profile icon colors if needed */
+
 .profile-icon-invert {
   filter: invert(1);
 }

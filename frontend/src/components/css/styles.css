@@ -1,6 +1,4 @@
-/* src/components/css/styles.css */
 
-/* Catering Banner Section */
 .catering-banner {
   height: 80vh;
   overflow: hidden;
@@ -13,18 +11,18 @@
 }
 
 .banner-text p.lead.welcome-text {
-  font-size: 2.5rem; /* Increased font size */
+  font-size: 3rem; /* Base font size for large screens */
   font-weight: 500;
 }
 
 .banner-text h1.display-4 {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Increased font size for prominence */
   font-weight: 700;
 }
 
 .btn-primary {
   padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   border-radius: 50px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -34,7 +32,7 @@
   transform: translateY(-3px);
 }
 
-/* Enhanced Styling for Special Offers Section */
+/* Special Offers Section */
 .offers-section {
   background-color: #f8f9fa;
   padding: 60px 0;
@@ -64,16 +62,16 @@
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Offer Image */
+
 .offer-image {
   height: 250px;
   object-fit: cover;
   border-radius: 15px 15px 0 0;
 }
 
-/* Overlay Styling */
+
 .offer-overlay {
-  background: rgba(0, 0, 0, 0.6); /* Darker overlay for contrast */
+  background: rgba(0, 0, 0, 0.6); 
   height: 100%;
   width: 100%;
   position: absolute;
@@ -92,14 +90,14 @@
 
 /* Text Styling in Offers */
 .offer-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  color: #ffc107; /* Highlighted color for titles */
+  color: #ffc107; 
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .offer-description {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #fff;
   margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -111,6 +109,7 @@
   color: #212529; /* Dark text */
   font-weight: 600;
   padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
   border-radius: 50px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   align-self: start;
@@ -122,14 +121,71 @@
   transform: translateY(-3px);
 }
 
-/* Specific Styling for Smaller Screens */
-@media (max-width: 768px) {
+
+@media (max-width: 991.98px) and (min-width: 768px) {
+
+  .banner-text p.lead.welcome-text {
+    font-size: 2rem;
+  }
+
+  .banner-text h1.display-4 {
+    font-size: 3rem;
+  }
+
+  .btn-primary {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.4rem;
+  }
+
+
   .offer-image {
-    height: 200px;
+    height: 220px;
   }
 
   .offer-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+  }
+
+  .offer-description {
+    font-size: 1.1rem;
+  }
+
+  .btn-order {
+    font-size: 1rem;
+    padding: 0.55rem 1.1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .catering-banner {
+    height: 60vh;
+  }
+
+  .banner-text p.lead.welcome-text {
+    font-size: 1.5rem;
+  }
+
+  .banner-text h1.display-4 {
+    font-size: 2.2rem;
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+
+  .banner-text {
+    padding: 0 1rem;
+  }
+
+  /* Offer Card Adjustments */
+  .offer-image {
+    height: 180px;
+  }
+
+  .offer-title {
+    font-size: 1.3rem;
   }
 
   .offer-description {
@@ -137,12 +193,43 @@
   }
 
   .btn-order {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 0.5rem 1rem;
+  }
+
+  /* Adjust spacing between offer cards */
+  .offer-card {
+    margin-bottom: 2rem;
   }
 }
 
-@media (max-width: 576px) {
+
+@media (max-width: 575.98px) {
+
+  .catering-banner {
+    height: 50vh;
+  }
+
+
+  .banner-text p.lead.welcome-text {
+    font-size: 1.2rem;
+  }
+
+  .banner-text h1.display-4 {
+    font-size: 1.8rem;
+  }
+
+  .btn-primary {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+
+  .banner-text {
+    padding: 0 0.5rem;
+  }
+
+
   .offer-image {
     height: 150px;
   }

@@ -1,6 +1,6 @@
 // templates/emailTemplates.js
 
-exports.paymentConfirmationEmail = (order,user) => {
+exports.paymentConfirmationEmail = (order,user,restaurant) => {
  
   return `
     <h1>Payment Confirmation</h1>
@@ -10,7 +10,7 @@ exports.paymentConfirmationEmail = (order,user) => {
     <ul>
       <li><strong>Order ID:</strong> ${order._id}</li>
       <li><strong>Package:</strong> ${order.packageType}</li>
-      <li><strong>Restaurant:</strong> ${order.restaurant.name}</li>
+      <li><strong>Restaurant:</strong> ${restaurant.name}</li>
       <li><strong>Number of People:</strong> ${order.numPeople}</li>
       <li><strong>Total Price:</strong> $${order.totalPrice.toFixed(2)}</li>
       <li><strong>Event Date & Time:</strong> ${new Date(order.dateTime).toLocaleString()}</li>

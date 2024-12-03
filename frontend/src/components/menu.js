@@ -18,7 +18,6 @@ const riyadhDistricts = [
   'Al Rabwa',
   'Al Mursalat',
   'Al Diriyah',
-  // Add more districts as needed
 ];
 const Menu = () => {
   const { restaurantId } = useParams();
@@ -36,12 +35,12 @@ const Menu = () => {
   const [error, setError] = useState(null);
   const { user } = useContext(AuthContext);
 
-  // Fetch restaurant and packages data
+
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
         const response = await fetch(`/restaurants/${restaurantId}/menu`, {
-          credentials: 'include', // Send cookies
+          credentials: 'include',
         });
         const data = await response.json();
         if (response.ok) {
@@ -61,9 +60,9 @@ const Menu = () => {
     fetchMenuData();
   }, [restaurantId]);
 
-  // Calculate total price
+
   useEffect(() => {
-    const equipmentCost = includeEquipment ? numPeople * 30 : 0; // Add $50 if equipment is included
+    const equipmentCost = includeEquipment ? numPeople * 30 : 0;
     if (selectedPackage && numPeople > 0) {
       setTotalPrice(selectedPackage.price * numPeople + equipmentCost);
     } else {
@@ -71,23 +70,22 @@ const Menu = () => {
     }
   }, [selectedPackage, numPeople, includeEquipment]);
 
-  // Handle package selection
+
   const handlePackageChange = (pkg) => setSelectedPackage(pkg);
 
-  // Handle booking confirmation
+
   const handleConfirmBooking = async () => {
     if (!selectedPackage) {
       setError('Please select a package.');
       return;
     }
     if (!user) {
-      //alert('You must be logged in to confirm a booking.');
       Swal.fire({
         title: 'Error',
         text: 'You need to login',
         icon: 'error',
       });
-      navigate('/auth/sign-in'); // Redirect to sign-in page
+      navigate('/auth/sign-in');
       return;
     }
     if (numPeople < 5) {
@@ -101,7 +99,7 @@ const Menu = () => {
     }
 
     try {
-      // Step 1: Store booking details in the session
+      
       const bookingResponse = await fetch('/api/bookings/storeBooking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -113,27 +111,27 @@ const Menu = () => {
           restaurantId: restaurant._id,
           dateTime,
           includeEquipment,
-          district, // Add district from state
+          district,
           streetName,
         }),
       });
-  
+
       const bookingData = await bookingResponse.json();
-  
+
       if (!bookingData.success) {
         setError(bookingData.message || 'Failed to store booking.');
         return;
       }
-  
-      // Step 2: Redirect to Stripe checkout
+
+
       const checkoutResponse = await fetch('/api/bookings/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
-  
+
       const checkoutData = await checkoutResponse.json();
-  
+
       if (checkoutData.url) {
         window.location.href = checkoutData.url; // Redirect to Stripe
       } else {
@@ -241,120 +239,120 @@ const Menu = () => {
         )}
       </div>
 
-{/* Booking Section */}
-{selectedPackage && (
-  <div className="row justify-content-center mt-5">
-    <div className="col-md-8 col-lg-6">
-      <div className="card">
-        <div className="card-header">
-          <h4 className="mb-0">Booking Details</h4>
-        </div>
-        <div className="card-body">
-          {error && (
-            <div className="alert alert-danger text-center">{error}</div>
-          )}
-          <div className="form-group">
-            <label htmlFor="numPeople">Number of People:</label>
-            <div className="input-group number-input-group">
-              <div className="input-group-prepend">
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
-                  onClick={() => setNumPeople(Math.max(5, numPeople - 1))}
-                >
-                  -
-                </button>
+      {/* Booking Section */}
+      {selectedPackage && (
+        <div className="row justify-content-center mt-5">
+          <div className="col-md-8 col-lg-6">
+            <div className="card">
+              <div className="card-header">
+                <h4 className="mb-0">Booking Details</h4>
               </div>
-              <input
-                type="number"
-                id="numPeople"
-                className="form-control text-center"
-                value={numPeople}
-                min="5"
-                required
-                onChange={(e) => setNumPeople(Number(e.target.value))}
-              />
-              <div className="input-group-append">
+              <div className="card-body">
+                {error && (
+                  <div className="alert alert-danger text-center">{error}</div>
+                )}
+                <div className="form-group">
+                  <label htmlFor="numPeople">Number of People:</label>
+                  <div className="input-group number-input-group">
+                    <div className="input-group-prepend">
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() => setNumPeople(Math.max(5, numPeople - 1))}
+                      >
+                        -
+                      </button>
+                    </div>
+                    <input
+                      type="number"
+                      id="numPeople"
+                      className="form-control text-center"
+                      value={numPeople}
+                      min="5"
+                      required
+                      onChange={(e) => setNumPeople(Number(e.target.value))}
+                    />
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() => setNumPeople(numPeople + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={includeEquipment}
+                      onChange={() => setIncludeEquipment(!includeEquipment)}
+                    />
+                    {' '}
+                    Include Equipment (Chairs, Tables): 30 SAR per person
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="dateTime">Date and Time:</label>
+                  <Flatpickr
+                    id="dateTime"
+                    className="form-control"
+                    options={{
+                      enableTime: true,
+                      dateFormat: 'Y-m-d H:i',
+                    }}
+                    value={dateTime}
+                    onChange={(selectedDates, dateStr) => setDateTime(dateStr)}
+                  />
+                </div>
+
+                {/* Riyadh District and Street Name */}
+                <div className="form-group">
+                  <label>Riyadh District</label>
+                  <select
+                    className="form-control"
+                    value={district}
+                    onChange={(e) => setDistrict(e.target.value)}
+                  >
+                    <option value="">Select District</option>
+                    {riyadhDistricts.map((dist) => (
+                      <option key={dist} value={dist}>
+                        {dist}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Street Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter street name"
+                    value={streetName}
+                    onChange={(e) => setStreetName(e.target.value)}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <p className="h5">
+                    <strong>Total Price:</strong> SAR{totalPrice}
+                  </p>
+                </div>
+
                 <button
-                  className="btn btn-outline-secondary"
-                  type="button"
-                  onClick={() => setNumPeople(numPeople + 1)}
+                  onClick={handleConfirmBooking}
+                  className="btn btn-primary btn-block"
+                  disabled={!selectedPackage || !dateTime || !district || !streetName}
                 >
-                  +
+                  Confirm Booking
                 </button>
               </div>
             </div>
           </div>
-          <div className="form-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={includeEquipment}
-                onChange={() => setIncludeEquipment(!includeEquipment)}
-              />
-              {' '}
-              Include Equipment (Chairs, Tables): 30 SAR per person
-            </label>
-          </div>
-          <div className="form-group">
-            <label htmlFor="dateTime">Date and Time:</label>
-            <Flatpickr
-              id="dateTime"
-              className="form-control"
-              options={{
-                enableTime: true,
-                dateFormat: 'Y-m-d H:i',
-              }}
-              value={dateTime}
-              onChange={(selectedDates, dateStr) => setDateTime(dateStr)}
-            />
-          </div>
-
-          {/* Riyadh District and Street Name */}
-          <div className="form-group">
-            <label>Riyadh District</label>
-            <select
-              className="form-control"
-              value={district}
-              onChange={(e) => setDistrict(e.target.value)}
-            >
-              <option value="">Select District</option>
-              {riyadhDistricts.map((dist) => (
-                <option key={dist} value={dist}>
-                  {dist}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Street Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter street name"
-              value={streetName}
-              onChange={(e) => setStreetName(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <p className="h5">
-              <strong>Total Price:</strong> SAR{totalPrice}
-            </p>
-          </div>
-
-          <button
-            onClick={handleConfirmBooking}
-            className="btn btn-primary btn-block"
-            disabled={!selectedPackage || !dateTime || !district || !streetName}
-          >
-            Confirm Booking
-          </button>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

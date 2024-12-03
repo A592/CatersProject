@@ -300,7 +300,7 @@ const Dashboard = () => {
                       <td>{order.restaurant.name}</td>
                       <td>{order.packageType}</td>
                       <td>{order.numPeople}</td>
-                      <td>${order.totalPrice}</td>
+                      <td>{order.totalPrice} SAR</td>
                       <td>{order.user.name}</td>
                       <td>
                         <span className="badge bg-success">Completed</span>

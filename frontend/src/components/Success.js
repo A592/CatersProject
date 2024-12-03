@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './css/payment.css'; // Add custom styles for success page
+import './css/payment.css'; 
 
 const Success = () => {
   const [bookingDetails, setBookingDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const apiCalled = useRef(false); // Use ref to track if API was already called
+  const apiCalled = useRef(false); 
 
   useEffect(() => {
     const fetchBookingDetails = async () => {

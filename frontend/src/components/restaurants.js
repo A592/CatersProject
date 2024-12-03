@@ -1,6 +1,4 @@
-// src/components/Restaurants.js
-
-import './css/restaurant.css'; 
+import './css/restaurant.css';
 import React, { useState, useEffect } from 'react';
 import { FaShoppingCart } from 'react-icons/fa'; // Importing Font Awesome Shopping Cart Icon
 
@@ -30,7 +28,7 @@ const Restaurants = () => {
         setError('Failed to load restaurants. Please try again later.');
         setLoading(false);
       });
-  }, [cuisineFilter]); // Refetch when cuisineFilter changes
+  }, [cuisineFilter]);
 
   const handleFilterChange = (e) => {
     setCuisineFilter(e.target.value);

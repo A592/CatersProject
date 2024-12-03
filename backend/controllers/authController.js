@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
-// Register a new user
+
 exports.registerUser = async (req, res) => {
     const { name, email, password, phoneNumber, role } = req.body;
 
@@ -20,13 +20,7 @@ exports.registerUser = async (req, res) => {
         return res.status(500).json({ message: 'Server error, please try again later', success: false });
     }
 };
-exports.profile = (req, res) => {
-    if (req.session && req.session.user) {
-        res.json({ success: true, user: req.session.user });
-    } else {
-        res.status(401).json({ success: false, message: 'Unauthorized' });
-    }
-};
+
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     console.log("WEDEDe");
@@ -40,7 +34,7 @@ exports.loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password', success: false });
         }
 
-        req.session.user = user; // Optional: Consider moving to token-based session management
+        req.session.user = user; 
         console.log(user);
         return res.status(200).json({
             message: 'Login successful!',

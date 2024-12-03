@@ -1,9 +1,7 @@
-// src/components/SignIn.js
-
 import './css/sign.css'; 
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; // For navigation after login
-import { signIn } from '../utils/api'; // Import the signIn function
+import { useNavigate } from 'react-router-dom'; 
+import { signIn } from '../utils/api'; 
 import { AuthContext } from '../context/AuthContext';
 
 const SignIn = () => {
