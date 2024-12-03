@@ -27,9 +27,13 @@ const orderSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    address: {
+        district: { type: String, required: true }, // Add district
+        streetName: { type: String, required: true }, // Add street name
+      },
     status: {
         type: String,
-        enum: ['Pending', 'In Progress', 'Completed','Canceled'],  // You can add more statuses here
+        enum: ['Pending', 'In Progress', 'Completed','Canceled'], 
         default: 'Pending'
     },
     includeEquipment: {
@@ -40,6 +44,7 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         default: 0, // Default equipment cost
     },
+    stripeSessionId: { type: String, unique: true },
     createdAt: {
         type: Date,
         default: Date.now

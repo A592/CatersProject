@@ -10,7 +10,7 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook to navigate to different routes
+  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
   const handleSignIn = async (e) => {
@@ -27,7 +27,6 @@ const SignIn = () => {
           navigate('/dashboard');
         }
       } else {
-        // Login failed, display error message
         setError(data.message || 'Login failed');
       }
     } catch (err) {

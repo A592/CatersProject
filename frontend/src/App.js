@@ -10,7 +10,8 @@ import Dashboard from './components/dashboard';
 import Restaurants from './components/restaurants';
 import Menu from './components/menu';
 import MyOrders from './components/myOrders';
-import Payment from './components/payment';
+import Success from './components/Success';
+import Failure from './components/Failure';
 import SignIn from './components/sign-in';
 import SignUp from './components/sign-up';
 import Header from './components/header';
@@ -43,7 +44,8 @@ const App = () => {
             <Route path="/restaurants" element={<Restaurants />} />
             <Route path="/restaurants/:restaurantId/menu" element={<Menu />} />
             <Route path="/my-orders" element={<MyOrders />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/failure" element={<Failure />} />
             <Route path="/auth/sign-in" element={<SignIn />} />
             <Route path="/auth/sign-up" element={<SignUp />} />
           </Routes>

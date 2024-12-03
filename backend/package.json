@@ -21,6 +21,7 @@
     "express-session": "^1.18.0",
     "mongoose": "^8.6.4",
     "nodemailer": "^6.9.16",
+    "stripe": "^17.4.0",
     "sweetalert2": "^11.14.1"
   }
 }

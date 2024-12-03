@@ -140,10 +140,10 @@ const grandTotal = order.totalPrice.toFixed(2);
     const breakdownY = doc.lastAutoTable.finalY + 10;
     const breakdownColumn = ['Description', 'Amount (USD)'];
     const breakdownRows = [
-      ['Package Total', `$${packageTotal}`],
-      ['Equipment Cost', `$${equipmentCost - (order.equipmentCost * taxRate)}`],
-      ['Tax (15%)', `$${tax}`],
-      ['Grand Total', `$${grandTotal}`],
+      ['Package Total', `SAR ${packageTotal}`],
+      ['Equipment Cost', `SAR ${equipmentCost - (order.equipmentCost * taxRate)}`],
+      ['Tax (15%)', `SAR ${tax}`],
+      ['Grand Total', `SAR ${grandTotal}`],
     ];
 
     doc.autoTable({
@@ -268,7 +268,7 @@ const grandTotal = order.totalPrice.toFixed(2);
                   <td>{order.restaurant.name}</td>
                   <td>{order.numPeople}</td>
                   <td>{order.equipmentCost}</td>
-                  <td>${order.totalPrice.toFixed(2)}</td>
+                  <td>SAR {order.totalPrice.toFixed(2)}</td>
                   <td>
                     <span
                       className={`badge ${
@@ -326,7 +326,7 @@ const grandTotal = order.totalPrice.toFixed(2);
                   <td>{order.packageType}</td>
                   <td>{order.restaurant.name}</td>
                   <td>{order.numPeople}</td>
-                  <td>${order.totalPrice.toFixed(2)}</td>
+                  <td>SAR {order.totalPrice.toFixed(2)}</td>
                   <td>
                     <span className="badge bg-success">{order.status}</span>
                   </td>

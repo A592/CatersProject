@@ -7,12 +7,26 @@ import Flatpickr from 'react-flatpickr';
 import Swal from 'sweetalert2';
 import 'flatpickr/dist/flatpickr.min.css';
 import { AuthContext } from '../context/AuthContext';
-
+const riyadhDistricts = [
+  'Al Olaya',
+  'Al Malaz',
+  'Al Nakheel',
+  'Al Murabba',
+  'Al Hamra',
+  'Diplomatic Quarter',
+  'Al Sahafa',
+  'Al Rabwa',
+  'Al Mursalat',
+  'Al Diriyah',
+  // Add more districts as needed
+];
 const Menu = () => {
   const { restaurantId } = useParams();
   const navigate = useNavigate();
   const [includeEquipment, setIncludeEquipment] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
+  const [district, setDistrict] = useState('');
+  const [streetName, setStreetName] = useState('');
   const [packages, setPackages] = useState([]);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [numPeople, setNumPeople] = useState(5);
@@ -87,31 +101,47 @@ const Menu = () => {
     }
 
     try {
-      const response = await fetch('/api/bookings/storeBooking', {
+      // Step 1: Store booking details in the session
+      const bookingResponse = await fetch('/api/bookings/storeBooking', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Send cookies
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           packageType: selectedPackage.name,
           numPeople,
           totalPrice,
           restaurantId: restaurant._id,
           dateTime,
-          includeEquipment
+          includeEquipment,
+          district, // Add district from state
+          streetName,
         }),
       });
-
-      const result = await response.json();
-      if (result.success) {
-        navigate('/payment');
+  
+      const bookingData = await bookingResponse.json();
+  
+      if (!bookingData.success) {
+        setError(bookingData.message || 'Failed to store booking.');
+        return;
+      }
+  
+      // Step 2: Redirect to Stripe checkout
+      const checkoutResponse = await fetch('/api/bookings/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+  
+      const checkoutData = await checkoutResponse.json();
+  
+      if (checkoutData.url) {
+        window.location.href = checkoutData.url; // Redirect to Stripe
       } else {
-        setError(result.message || 'Failed to store booking.');
+        setError('Failed to initiate payment.');
       }
     } catch (error) {
-      console.error('Error storing booking:', error);
-      setError('An error occurred while storing booking.');
+      console.error('Error during booking or payment:', error);
+      setError('An unexpected error occurred. Please try again.');
     }
   };
 
@@ -193,7 +223,7 @@ const Menu = () => {
                   <h5 className="card-title">{pkg.name}</h5>
                   <p className="card-text text-black">{pkg.description}</p>
                   <p>
-                    <strong>Price:</strong> ${pkg.price}
+                    <strong>Price:</strong> SAR{pkg.price}
                   </p>
                   <div className="mt-auto">
                     <button
@@ -211,93 +241,120 @@ const Menu = () => {
         )}
       </div>
 
-      {/* Booking Section */}
-      {selectedPackage && (
-        <div className="row justify-content-center mt-5">
-          <div className="col-md-8 col-lg-6">
-            <div className="card">
-              <div className="card-header">
-                <h4 className="mb-0">Booking Details</h4>
-              </div>
-              <div className="card-body">
-                {error && (
-                  <div className="alert alert-danger text-center">{error}</div>
-                )}
-                <div className="form-group">
-                  <label htmlFor="numPeople">Number of People:</label>
-                  <div className="input-group number-input-group">
-                    <div className="input-group-prepend">
-                      <button
-                        className="btn btn-outline-secondary"
-                        type="button"
-                        onClick={() => setNumPeople(Math.max(5, numPeople - 1))}
-                      >
-                        -
-                      </button>
-                    </div>
-                    <input
-                      type="number"
-                      id="numPeople"
-                      className="form-control text-center"
-                      value={numPeople}
-                      min="5"
-                      required
-                      onChange={(e) => setNumPeople(Number(e.target.value))}
-                    />
-                    <div className="input-group-append">
-                      <button
-                        className="btn btn-outline-secondary"
-                        type="button"
-                        onClick={() => setNumPeople(numPeople + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={includeEquipment}
-                      onChange={() => setIncludeEquipment(!includeEquipment)}
-                    />
-                    {' '}
-                    Include Equipment (Chairs, Tables): $30 per person
-                  </label>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="dateTime">Date and Time:</label>
-                  <Flatpickr
-                    id="dateTime"
-                    className="form-control"
-                    options={{
-                      enableTime: true,
-                      dateFormat: 'Y-m-d H:i',
-                    }}
-                    value={dateTime}
-                    onChange={(selectedDates, dateStr) => setDateTime(dateStr)}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <p className="h5">
-                    <strong>Total Price:</strong> ${totalPrice}
-                  </p>
-                </div>
-
+{/* Booking Section */}
+{selectedPackage && (
+  <div className="row justify-content-center mt-5">
+    <div className="col-md-8 col-lg-6">
+      <div className="card">
+        <div className="card-header">
+          <h4 className="mb-0">Booking Details</h4>
+        </div>
+        <div className="card-body">
+          {error && (
+            <div className="alert alert-danger text-center">{error}</div>
+          )}
+          <div className="form-group">
+            <label htmlFor="numPeople">Number of People:</label>
+            <div className="input-group number-input-group">
+              <div className="input-group-prepend">
                 <button
-                  onClick={handleConfirmBooking}
-                  className="btn btn-primary btn-block"
-                  disabled={!selectedPackage || !dateTime}
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={() => setNumPeople(Math.max(5, numPeople - 1))}
                 >
-                  Confirm Booking
+                  -
+                </button>
+              </div>
+              <input
+                type="number"
+                id="numPeople"
+                className="form-control text-center"
+                value={numPeople}
+                min="5"
+                required
+                onChange={(e) => setNumPeople(Number(e.target.value))}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={() => setNumPeople(numPeople + 1)}
+                >
+                  +
                 </button>
               </div>
             </div>
           </div>
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={includeEquipment}
+                onChange={() => setIncludeEquipment(!includeEquipment)}
+              />
+              {' '}
+              Include Equipment (Chairs, Tables): 30 SAR per person
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="dateTime">Date and Time:</label>
+            <Flatpickr
+              id="dateTime"
+              className="form-control"
+              options={{
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
+              }}
+              value={dateTime}
+              onChange={(selectedDates, dateStr) => setDateTime(dateStr)}
+            />
+          </div>
+
+          {/* Riyadh District and Street Name */}
+          <div className="form-group">
+            <label>Riyadh District</label>
+            <select
+              className="form-control"
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+            >
+              <option value="">Select District</option>
+              {riyadhDistricts.map((dist) => (
+                <option key={dist} value={dist}>
+                  {dist}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Street Name</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter street name"
+              value={streetName}
+              onChange={(e) => setStreetName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <p className="h5">
+              <strong>Total Price:</strong> SAR{totalPrice}
+            </p>
+          </div>
+
+          <button
+            onClick={handleConfirmBooking}
+            className="btn btn-primary btn-block"
+            disabled={!selectedPackage || !dateTime || !district || !streetName}
+          >
+            Confirm Booking
+          </button>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

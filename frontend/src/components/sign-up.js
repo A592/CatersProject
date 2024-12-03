@@ -1,7 +1,7 @@
-import './css/sign.css'; 
+import './css/sign.css';
 import React, { useState } from 'react';
 import { signUp } from '../utils/api';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const navigate = useNavigate();
